@@ -388,8 +388,10 @@ function pick(i,p) {
 					  p_id:p
 					  }, 
 			  success: function(data){
+			  if(data=='중복'){alert("이미 목록에 있습니다.")}else{
 				  	alert("위시리스트에 추가 되었습니다.");
 				  	$("#heart").css({"color":"red"});
+				  	}
 			  },
 			  error : function() {
 				alert("오류 발생");

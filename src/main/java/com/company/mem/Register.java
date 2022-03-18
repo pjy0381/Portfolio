@@ -48,7 +48,7 @@ public class Register extends HttpServlet {
 			
 			stmt.executeUpdate();
 			
-			response.setContentType("text/html; charset=euc-kr"); 
+			response.setContentType("text/html; charset=utf-8"); 
 			PrintWriter out = response.getWriter(); 
 			
 			String str="";
