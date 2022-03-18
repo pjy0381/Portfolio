@@ -1,0 +1,175 @@
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+.main{
+	width: 100%;
+	float: left;
+}
+header{
+	position:sticky; 
+	width:100%; 
+	float: left;
+	top: 0;
+	z-index: 999;
+	background: #fff;
+}
+.main_user ul{
+	float: right;
+}
+
+.main_user li {
+	float: left;
+	margin-right: 30px;
+	list-style: circle;
+	font-size: 12px;
+	padding-top: 10px
+}
+
+.main_user a {
+	text-decoration: none;
+	color: black;
+}
+
+.main_user a:hover {
+	color: #ddd;
+}
+
+.shop_menu {
+	float: left;
+	width: 100%;
+}
+
+.shop_menu img{
+	max-width: 100%;
+	height: 100%;
+	object-fit:cover;
+}
+
+.shop_menu ul {
+	width: 60%;
+	text-align: center;
+	float: left;
+}
+
+.menu_H {
+	display:inline-block;
+	list-style: none;
+	width: 15%;
+}
+.menu_H a{
+	float: left; 
+	width: 100%; 
+	color: black;
+	text-decoration: none;
+	padding-top: 30px;
+	padding-bottom:10px; 
+}
+.newM{
+	float: left;
+	width:100%;
+	text-align: center;
+	height: 0;
+	overflow: hidden;
+	transition: all 0.5s;
+}
+.newM ul{
+	width: 100%;
+	list-style: none;
+}
+.menu_H:hover>a{
+	border-bottom: 2px solid black;
+	color: #ddd;
+}
+.shop_menu li:hover .newM{
+	height: 300px;
+	}
+.menu_H:hover ul{
+	display: block;
+	}
+
+.main_btn {
+	font: 20px;
+}
+
+.shop_menu img {
+	float: left;
+	margin: 10px;
+}
+.logo{
+	float: left;
+	width: 20%;
+}
+.logo a{
+	text-align: center;
+	width: 100%;
+}
+section{
+	float: left;
+	text-align: center;
+	width: 100%;
+	height: 1300px;
+	padding-bottom: 100px;
+}
+footer{
+	float: left;
+	text-align: center;
+	width: 100%;
+	height: 50px;
+	background: black;
+}
+
+.sideProduct{
+	position:sticky; 
+	width: 20%;
+	float: left;
+	padding: 6rem;	
+	top: 0;
+}
+.paging {
+	margin-bottom: 100px;
+	text-align: center;
+	width: 80%;
+	float: right;
+}
+.paging a{
+	text-decoration: none;
+	color: black;
+}
+.paging a:hover{
+	color: #ddd;
+}
+
+.strike-text {
+    color: red;
+    text-decoration: line-through
+}
+
+.product-image {
+    width: 100%
+}
+
+.dot {
+    height: 7px;
+    width: 7px;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 3px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.spec-1 {
+    color: #938787;
+    font-size: 15px
+}
+
+h5 {
+    font-weight: 400
+}
+
+.para {
+    font-size: 16px
+}
+
