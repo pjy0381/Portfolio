@@ -421,3 +421,29 @@ function pickView(i,p) {
 				alert("오류 발생");
 			  }
 			});}
+
+			
+
+function modOrder(id,i) {
+	$.ajax({
+			  type:'get',
+			  url:'http://localhost:8081/ShoppingMall/OrderState', 
+			  async:true,
+			  	data:{
+			  		o_id:id,
+					  state:i,
+					  }, 
+			  success: function(data){
+			  	alert("취소 신청완료")
+			  },
+			  error : function() {
+				alert("오류 발생");
+			  }
+			});}			
+			
+function state(i){
+	for(var k = 0; k<i; k++){
+	if($("#state"+k).text() == '주문완료'){$("#state"+k).css("color","blue");}
+	else if($("#state"+k).text() == '취소 신청' || $("#state"+k).text() == '취소완료'){$("#state"+k).css("color","red");}
+	}
+}			

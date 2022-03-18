@@ -15,6 +15,12 @@ date.setDate(date.getDate()-7);
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+		integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script type="text/javascript" src="js/mainJs.js"></script>
 </head>
 <body>
 
@@ -48,9 +54,9 @@ date.setDate(date.getDate()-7);
 			</td>
 			<td>
 				<%if(order.getState().equals("주문 신청")||order.getState().equals("주문 확인")){ %>
-				<a>주문 취소</a>
+				<a href="" onclick="modOrder(<%=order.getO_id()%>,'취소 신청')">주문 취소</a>
 				<%}else{ %>
-					취소가 불가능합니다.
+					취소 불가
 				<%} %>
 			</td>
 		</tr>

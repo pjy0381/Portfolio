@@ -14,8 +14,13 @@ date.setDate(date.getDate()-14);
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="js/mainJs.js"></script>
 </head>
-<body>
+<body onload="state(<%=oList.size()%>)">
 
 	<table class="table">
 		<thead>
@@ -38,15 +43,17 @@ date.setDate(date.getDate()-14);
 			<td><%=order.getO_id()%></td>
 			<td><a href="ShopDetails?id=<%=order.getP_id()%>"><%=order.getO_name()%></a></td>
 			<td><%=order.getPrice()%></td>
-			<td><%=order.getState()%></td>
+			<td id="state<%=i%>"><%=order.getState()%></td>
 			<td><%=order.getName()%></td>
 			<td>
 			<%if(order.getReview().equals("no")){ 
 				if(order.getPdate().compareTo(date)==1)
 			%>
-			<%if(order.getPdate().compareTo(date)==1){%>
+			<%if(order.getPdate().compareTo(date)==1){
+				if(order.getState().equals("주문완료")){
+			%>
 				<a>리뷰 작성</a>
-				<%}else{ %>
+				<%}}else{ %>
 				기간초과
 			<%}}else{ %>
 				작성완료
