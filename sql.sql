@@ -159,6 +159,8 @@ create table tbl_order(
 
 drop table tbl_order
 
+update tbl_order set state = '주문 요청'
+
 select * from tbl_order order by o_id desc
 
 select nvl(max(o_id),0)+1 from tbl_order
@@ -179,4 +181,4 @@ insert into tbl_pick values('1','1','1','1')
 
 update tbl_pick set pick = 'no'
 
-update tbl_order set state = '주문완료' where o_id = 1
+update tbl_order set state = '주문완료' where o_id = 2
