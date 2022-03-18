@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import com.company.bin.MemberBin;
 import com.company.bin.OrderList;
+import com.company.bin.WishList;
 import com.company.common.JDBCCon;
 
 @WebServlet("/MyPageInfo")
@@ -85,8 +86,26 @@ public class MyPageInfo extends HttpServlet {
 					oList.add(order);
 				}
 				
+				sql = "select * from tbl_pick where id = ? and pick = 'yes'";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, id);
+				
+				rs = stmt.executeQuery();
+				
+				ArrayList<WishList> wList = new ArrayList<WishList>();
+				while(rs.next()) {
+					WishList wish = new WishList();
+					wish.setId(rs.getString("id"));
+					wish.setIp(rs.getString("ip"));
+					wish.setP_id(rs.getInt("p_id"));
+					wish.setPick(rs.getString("pick"));
+					wish.setP_name(rs.getString("p_name"));
+					wList.add(wish);
+				}
+				
 				request.setAttribute("mem", mem);
 				request.setAttribute("oList", oList);
+				request.setAttribute("wList", wList);
 				RequestDispatcher view = request.getRequestDispatcher("index.jsp?webApp=myPage");
 				view.forward(request, response);
 				

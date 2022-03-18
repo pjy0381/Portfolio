@@ -46,7 +46,7 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
-<body>
+<body onload="pickView('<%=id%>',<%=p_id%>)">
 
 	<header class="header"><jsp:include page="header.jsp" />
 	</header>
@@ -78,7 +78,7 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 							<h3><%=p.getP_name()%></h3>
 							<div
 								class="d-flex justify-content-center small text-warning mb-2"
-								onloadstart="totalR(<%=p.getP_id()%>)">
+								onloadstart="totalR(<%=p.getP_id()%>);">
 								<%
 								for (int k = 1; k <= avgG; k++) {
 								%>
@@ -137,7 +137,7 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 							</div>
 						</div>
 						<a  class="primary-btn" onclick="addBasket(<%=p.getP_id()%>)">ADD TO CARD</a> <a href="#"
-							class="heart-icon" onclick="pick('<%=id%>',<%=p_id%>)"><span class="bi bi-heart-fill" id="heart"></span></a>
+							class="heart-icon" onclick="pick('<%=id%>',<%=p_id%>,'<%=p.getP_name()%>')"><span class="bi bi-heart-fill" id="heart"></span></a>
 					</div>
 				</div>
 				

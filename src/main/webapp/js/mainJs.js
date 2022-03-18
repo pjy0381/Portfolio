@@ -375,7 +375,7 @@ function allDrop() {
 		}
 		}
 		
-function pick(i,p) {
+function pick(i,p,name) {
 	
 	if(i == 'null'){alert("로그인 후 이용 가능합니다.")}
 	else{
@@ -385,10 +385,14 @@ function pick(i,p) {
 			  async:true,
 			  	data:{
 					  id:i,
-					  p_id:p
+					  p_id:p,
+					  p_name:name
 					  }, 
 			  success: function(data){
-			  if(data=='중복'){alert("이미 목록에 있습니다.")}else{
+			  if(data=='삭제'){
+			  alert("삭제 되었습니다.");
+			  $("#heart").css({"color":"black"});
+			  }else{
 				  	alert("위시리스트에 추가 되었습니다.");
 				  	$("#heart").css({"color":"red"});
 				  	}
@@ -398,3 +402,22 @@ function pick(i,p) {
 			  }
 			});}
 }
+
+function pickView(i,p) {
+	$.ajax({
+			  type:'get',
+			  url:'http://localhost:8081/ShoppingMall/PickView', 
+			  async:true,
+			  	data:{
+					  id:i,
+					  p_id:p
+					  }, 
+			  success: function(data){
+			  if(data=='중복'){
+			  	$("#heart").css({"color":"red"});
+			  }
+			  },
+			  error : function() {
+				alert("오류 발생");
+			  }
+			});}

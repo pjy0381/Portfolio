@@ -166,11 +166,14 @@ create table tbl_pick(
 	id varchar2(20),
 	ip varchar2(30) not null,
 	pick varchar2(20),
-	p_id number(20)
+	p_id number(20),
+	p_name varchar2(20)
 )
 
 drop table tbl_pick
 
-select * from tbl_pick
+select * from tbl_pick where id = 'abcd'
 
 insert into tbl_pick values('1','1','1','1')
+
+update tbl_pick set pick = 'no'

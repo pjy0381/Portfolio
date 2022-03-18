@@ -12,7 +12,7 @@
         <li><a href="MyPageInfo">개인 정보</a></li>
         <li><a href="MyPageInfo?view=orderList">주문 내역</a></li>
         <li><a href="MyPageInfo?view=cancle">취소/반품</a></li>
-        <li><a>위시리스트</a></li>
+        <li><a href="MyPageInfo?view=wishList">위시리스트</a></li>
         <li><a>문의 사항</a></li>
       </ul>
       <br>
