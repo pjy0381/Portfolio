@@ -137,7 +137,7 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 							</div>
 						</div>
 						<a  class="primary-btn" onclick="addBasket(<%=p.getP_id()%>)">ADD TO CARD</a> <a href="#"
-							class="heart-icon" onclick="pick('<%=id%>',<%=p_id%>)"><span class="bi bi-heart-fill" id="heart"><%=id %></span></a>
+							class="heart-icon" onclick="pick('<%=id%>',<%=p_id%>)"><span class="bi bi-heart-fill" id="heart"></span></a>
 					</div>
 				</div>
 				
