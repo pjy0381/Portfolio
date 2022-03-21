@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.company.bin.OrderList"%>
@@ -8,19 +9,20 @@
 <%
 ArrayList<OrderList> oList = (ArrayList<OrderList>) request.getAttribute("oList");
 Date date = new	Date();
-date.setDate(date.getDate()-7);
+SimpleDateFormat sdformat = new SimpleDateFormat("yyyy/MM/dd");
+Calendar cal = Calendar.getInstance();
+cal.setTime(date);
+cal.add(Calendar.DATE, -7);
+String today = sdformat.format(cal.getTime());
+Date to = sdformat.parse(today);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-		integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-	<script type="text/javascript" src="js/mainJs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://localhost:8081/ShoppingMall/js/mainJs.js"></script>
 </head>
 <body>
 
@@ -46,7 +48,7 @@ date.setDate(date.getDate()-7);
 			<td><a href="ShopDetails?id=<%=order.getP_id()%>"><%=order.getO_name()%></a></td>
 			<td><%=order.getName()%></td>
 			<td><%=order.getPdate()%></td>
-			<td><%if(order.getPdate().compareTo(date)==1){
+			<td><%if(order.getPdate().compareTo(to)==1){
 				if(order.getState().equals("반품 요청")){
 					%> <span style="color: blue;">신청 중</span> <%
 				}else if (order.getState().equals("주문완료")){

@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.company.bin.OrderList"%>
 <%@page import="java.util.ArrayList"%>
@@ -7,24 +9,27 @@
 <%
 ArrayList<OrderList> oList = (ArrayList<OrderList>) request.getAttribute("oList");
 Date date = new	Date();
-date.setDate(date.getDate()-14);
+SimpleDateFormat sdformat = new SimpleDateFormat("yyyy/MM/dd");
+Calendar cal = Calendar.getInstance();
+cal.setTime(date);
+cal.add(Calendar.DATE, -14);
+String today = sdformat.format(cal.getTime());
+Date to = sdformat.parse(today);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="js/mainJs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://localhost:8081/ShoppingMall/js/mainJs.js"></script>
 </head>
 <body onload="state(<%=oList.size()%>)">
 
 	<table class="table">
 		<thead>
 			<tr>
+				<th><%=today %></th>
 				<th>주문번호</th>
 				<th style="width: 50%">주문내역</th>
 				<th>가격</th>
@@ -51,7 +56,7 @@ date.setDate(date.getDate()-14);
 				<span style="color: blue;">작성완료</span>
 				<%
 			}else if(order.getReview().equals("no")){
-				if(order.getPdate().compareTo(date)==1){
+				if(order.getPdate().compareTo(to)==1){
 					if(order.getState().equals("주문완료")){
 			%>
 				<a href="reviewR.jsp" onclick="openPopupA(this.href+'?p_id=<%=order.getP_id() %>&o_id=<%=order.getO_id() %>'); return false;">리뷰 작성</a>

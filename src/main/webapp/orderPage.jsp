@@ -25,6 +25,7 @@ if (name == null) {
 <head>
 <meta charset="UTF-8">
 <title>결제하기</title>
+
 <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
 <link rel="stylesheet" href="css/nice-select.css" type="text/css">
@@ -32,11 +33,9 @@ if (name == null) {
 <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style2.css" type="text/css">
-<link href="css/mainStyle.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet"
-	href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="css/mainStyle.css"  type="text/css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 </head>
 <body>
 	<header class="header"><jsp:include page="header.jsp" /></header>
@@ -170,11 +169,9 @@ if (name == null) {
 		%>
 	</section>
 	<footer><jsp:include page="footer.jsp" /></footer>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-		integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript" src="js/mainJs.js"></script>
+	
 </body>
 </html>
