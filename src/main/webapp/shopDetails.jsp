@@ -54,6 +54,7 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 	<!-- Product Details Section Begin -->
 	<section class="product-details spad"
 		style="height: auto; padding-bottom: 250px">
+		
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-6">
@@ -92,13 +93,12 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 								} else  if(avgG!=5){
 								%>
 								<span class="bi bi-star"></span>
-								<%
-								for (int k = 1; k < 5 - avgG; k++) {
+								<%}
+								for (int k = 0 ; k <(5 - Math.ceil(avgG)) ; k++) {
 								%>
 								<span class="bi bi-star"></span>
 								<%
-								}
-								}
+									}
 								%>
 								<span><%=number / 100%></span> <span>(<%=rList.size()%>
 									reviews)

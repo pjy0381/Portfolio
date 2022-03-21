@@ -127,13 +127,15 @@ create table tbl_reivews(
 )
 drop table tbl_reivews
 
+select r_url from tbl_reivews order by r_url desc;
+
 insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values((select max(r_id) from tbl_reivews)+1,14,'고객','두번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',4.5)
 
 insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values((select max(r_id) from tbl_reivews)+1,14,'고객','세번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',3.8)
 
-insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values((select max(r_id) from tbl_reivews)+1,14,'고객','네번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',5.0)
+insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values(0,14,'고객','네번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',5.0)
 
-select * from tbl_reivews
+select r_url from tbl_reivews order by r_id desc
 
 select count(r_id) from tbl_reivews where p_id = 14
 
@@ -151,11 +153,13 @@ create table tbl_order(
 	dad varchar2(30),
 	pay varchar2(20),
 	price number(30),
-	state varchar2(30) default '주문 신청',
+	state varchar2(30) default '주문 요청',
 	review varchar2(10) default 'no' ,
 	pdate date default sysdate,
 	primary key(o_id)
 )
+
+ALTER TABLE tbl_order MODIFY state varchar2(30) DEFAULT '주문 요청';
 
 drop table tbl_order
 
@@ -164,6 +168,8 @@ update tbl_order set state = '주문 요청'
 select * from tbl_order order by o_id desc
 
 select nvl(max(o_id),0)+1 from tbl_order
+
+DELETE FROM tbl_order WHERE o_id <=16 and o_id>12
 
 create table tbl_pick(
 	id varchar2(20),
@@ -181,4 +187,11 @@ insert into tbl_pick values('1','1','1','1')
 
 update tbl_pick set pick = 'no'
 
-update tbl_order set state = '주문완료' where o_id = 2
+update tbl_order set state = '주문완료' where o_id = 7
+
+insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values((select nvl(max(r_id),0)+1 from tbl_reivews),14,'고객','네번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',5.0)
+
+select nvl(max(r_id),0)+1 from tbl_reivews
+
+
+update tbl_order set review = 'no'

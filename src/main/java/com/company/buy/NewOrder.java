@@ -62,7 +62,7 @@ public class NewOrder extends HttpServlet {
 			session.setAttribute("basketList", basketList);
 			
 			
-			response.setContentType("text/html; charset=euc-kr"); 
+			response.setContentType("text/html; charset=utf-8"); 
 			PrintWriter out = response.getWriter(); 
 			
 			String str="";

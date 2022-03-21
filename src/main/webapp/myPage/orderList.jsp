@@ -46,13 +46,15 @@ date.setDate(date.getDate()-14);
 			<td id="state<%=i%>"><%=order.getState()%></td>
 			<td><%=order.getName()%></td>
 			<td>
-			<%if(order.getReview().equals("no")){ 
-				if(order.getPdate().compareTo(date)==1)
+			<%if(order.getReview().equals("yes")){ 
+				%>
+				<span style="color: blue;">작성완료</span>
+				<%
+			}else if(order.getReview().equals("no")){
+				if(order.getPdate().compareTo(date)==1){
+					if(order.getState().equals("주문완료")){
 			%>
-			<%if(order.getPdate().compareTo(date)==1){
-				if(order.getState().equals("주문완료")){
-			%>
-				<a>리뷰 작성</a>
+				<a href="reviewR.jsp" onclick="openPopupA(this.href+'?p_id=<%=order.getP_id() %>&o_id=<%=order.getO_id() %>'); return false;">리뷰 작성</a>
 				<%}}else{ %>
 				기간초과
 			<%}}else{ %>
