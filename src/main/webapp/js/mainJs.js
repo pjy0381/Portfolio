@@ -338,7 +338,7 @@ function allDrop() {
 				var _nAd = $("#nAd"+k).val();
 				var _address = $("#address"+k).val();
 				var _dAd = $("#dAd"+k).val();
-				var _payment = $("#payment"+k).val();
+				var _payment = $("#payment").val();
 				var _price = $("#price"+k).val();
 				
 				$.ajax({

@@ -163,7 +163,7 @@ ALTER TABLE tbl_order MODIFY state varchar2(30) DEFAULT '주문 요청';
 
 drop table tbl_order
 
-update tbl_order set state = '주문 요청'
+update tbl_order set pay = 'toss'
 
 select * from tbl_order order by o_id desc
 
@@ -195,3 +195,7 @@ select nvl(max(r_id),0)+1 from tbl_reivews
 
 
 update tbl_order set review = 'no'
+
+select sum(price) from tbl_order where pdate>= TO_DATE('2022/03','YYYY/MM') and pdate<=TO_DATE('2022/04','YYYY/MM')
+
+select * from shopMem order by id

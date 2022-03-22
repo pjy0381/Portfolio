@@ -79,7 +79,6 @@ if (name == null) {
 						<input type="hidden" value="<%=nad %>" name="nAd" id="nAd<%=i%>">
 						<input type="hidden" value="<%=address %>" name="address" id="address<%=i%>">
 						<input type="hidden" value="<%=dad %>" name="dAd" id="dAd<%=i%>">
-						<input type="hidden"  name="payment" id="payment" id="payment<%=i%>">
 						<input type="hidden" value="<%=bas.getPrice()*bas.getQuantity() %>" name="price" id="price<%=i%>">
 					</form>
 				</div>
@@ -87,6 +86,7 @@ if (name == null) {
 			<%
 			}
 			%>
+			<input type="hidden"  name="payment" id="payment">
 			<h5 align="right">
 				총합: &#8361;<%=total%></h5>
 

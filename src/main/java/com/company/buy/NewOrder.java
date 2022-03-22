@@ -76,6 +76,8 @@ public class NewOrder extends HttpServlet {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCCon.close(stmt, conn);
 		}
 	}
 

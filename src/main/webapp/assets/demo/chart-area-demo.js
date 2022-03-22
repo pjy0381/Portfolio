@@ -4,12 +4,50 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
+
+function minusDay(i){
+var today = new Date(); 
+var day = today.getDate();
+today.setDate(day-i);
+return today.getMonth()+1+"/"+today.getDate();
+}
+
+function daily(i) {
+	function daily2(i) {
+		var today = new Date();
+		var day = today.getDate();
+		today.setDate(day-i);
+		var year = today.getFullYear();
+		var result = year+"/"+minusDay(i)
+	
+		return result	
+	}
+	
+	var result = "";
+	$.ajax({
+			  type:'post',
+			  url:'http://localhost:8081/ShoppingMall/DailySales', 
+			  async:false,
+			  	data:{
+			  		day:daily2(i),
+			  		tom:daily2(i-1)
+					  }, 
+			  success: function(data){
+			  	result = data;
+			  },
+			  error : function() {
+				alert("오류 발생");
+			  }
+			});
+	return result		
+}		
+
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Mar 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"],
+    labels: [minusDay(12), minusDay(11), minusDay(10), minusDay(9), minusDay(8), minusDay(7), minusDay(6), minusDay(5), minusDay(4), minusDay(3), minusDay(2), minusDay(1), minusDay(0)],
     datasets: [{
-      label: "Sessions",
+      label: "일 매출",
       lineTension: 0.3,
       backgroundColor: "rgba(2,117,216,0.2)",
       borderColor: "rgba(2,117,216,1)",
@@ -20,7 +58,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBackgroundColor: "rgba(2,117,216,1)",
       pointHitRadius: 50,
       pointBorderWidth: 2,
-      data: [10000, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451],
+      data: [daily(12) , daily(11), daily(10), daily(9), daily(8), daily(7), daily(6), daily(5), daily(4), daily(3), daily(2), daily(1), daily(0)],
     }],
   },
   options: {
@@ -39,7 +77,7 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 40000,
+          max: 1000000,
           maxTicksLimit: 5
         },
         gridLines: {

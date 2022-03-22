@@ -12,19 +12,20 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">재무 조회</div>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="Manager">
                                 매출 관리
                             </a>
                             <div class="sb-sidenav-menu-heading">사이트 관리</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                	회원 목록
+                                	회원 관리
                                 	 <span class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></span>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">회원 조회</a>
+                                    <a class="nav-link" href="Manager?mod=showMem">회원 조회</a>
                                     <a class="nav-link" href="#">회원 수정</a>
                                     <a class="nav-link" href="#">회원 삭제</a>
+                                    <a class="nav-link" href="#">문의 사항</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

@@ -21,15 +21,11 @@ Date to = sdformat.parse(today);
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="http://localhost:8081/ShoppingMall/js/mainJs.js"></script>
 </head>
 <body onload="state(<%=oList.size()%>)">
-
 	<table class="table">
 		<thead>
 			<tr>
-				<th><%=today %></th>
 				<th>주문번호</th>
 				<th style="width: 50%">주문내역</th>
 				<th>가격</th>
