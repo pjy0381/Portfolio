@@ -23,8 +23,8 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="Manager?mod=showMem">회원 조회</a>
-                                    <a class="nav-link" href="#">회원 수정</a>
-                                    <a class="nav-link" href="#">회원 삭제</a>
+                                    <a class="nav-link" href="Manager?mod=modMem">회원 수정</a>
+                                    <a class="nav-link" href="Manager?mod=deleMem">회원 삭제</a>
                                     <a class="nav-link" href="#">문의 사항</a>
                                 </nav>
                             </div>

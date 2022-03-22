@@ -44,6 +44,6 @@ String url = "manager/"+mod+".jsp";
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
         <script src="js/datatables-simple-demo.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" ></script>
-        
+        <script type="text/javascript" src="js/mainJs.js"></script>
     </body>
 </html>
