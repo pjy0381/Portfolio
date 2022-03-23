@@ -22,9 +22,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="Manager?mod=showMem">회원 조회</a>
-                                    <a class="nav-link" href="Manager?mod=modMem">회원 수정</a>
-                                    <a class="nav-link" href="Manager?mod=deleMem">회원 삭제</a>
+                                    <a class="nav-link" href="Manager?mod=modMem">회원 수정/삭제</a>
                                     <a class="nav-link" href="#">문의 사항</a>
                                 </nav>
                             </div>
@@ -51,14 +49,15 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">등록</a>
-                                            <a class="nav-link" href="#">수정</a>
-                                            <a class="nav-link" href="#">삭제</a>
+                                            <a class="nav-link" href="Manager?mod=orderList">주문 처리</a>
+                                            <a class="nav-link" href="Manager?mod=sendList">발송 처리</a>
+                                            <a class="nav-link" href="Manager?mod=returnList">반품 처리</a>
+                                            <a class="nav-link" href="Manager?mod=cancleList">취소 처리</a>
                                         </nav>
                                     </div>
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading">이벤트 관리</div>
+                            <div class="sb-sidenav-menu-heading">이벤트 품목 관리</div>
                             <a class="nav-link" href="#">
                                 추가
                             </a>

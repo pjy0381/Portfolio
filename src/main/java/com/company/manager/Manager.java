@@ -58,7 +58,7 @@ public class Manager extends HttpServlet {
 			rs.close();
 			stmt.close();
 			
-			sql = "select * from shopMem order by id";
+			sql = "select * from shopMem order by reg desc";
 			stmt = conn.prepareStatement(sql);
 			
 			rs = stmt.executeQuery();

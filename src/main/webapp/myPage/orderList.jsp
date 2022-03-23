@@ -49,11 +49,11 @@ Date to = sdformat.parse(today);
 			<td>
 			<%if(order.getReview().equals("yes")){ 
 				%>
-				<span style="color: blue;">작성완료</span>
+				<span style="color: blue;">작성 완료</span>
 				<%
 			}else if(order.getReview().equals("no")){
 				if(order.getPdate().compareTo(to)==1){
-					if(order.getState().equals("주문완료")){
+					if(order.getState().equals("배송 완료")){
 			%>
 				<a href="reviewR.jsp" onclick="openPopupA(this.href+'?p_id=<%=order.getP_id() %>&o_id=<%=order.getO_id() %>'); return false;">리뷰 작성</a>
 				<%}}else{ %>

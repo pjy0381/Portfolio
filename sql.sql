@@ -187,7 +187,7 @@ insert into tbl_pick values('1','1','1','1')
 
 update tbl_pick set pick = 'no'
 
-update tbl_order set state = '주문완료' where o_id = 7
+update tbl_order set state = '배송 완료' where o_id = 1
 
 insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values((select nvl(max(r_id),0)+1 from tbl_reivews),14,'고객','네번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',5.0)
 
@@ -199,3 +199,5 @@ update tbl_order set review = 'no'
 select sum(price) from tbl_order where pdate>= TO_DATE('2022/03','YYYY/MM') and pdate<=TO_DATE('2022/04','YYYY/MM')
 
 select * from shopMem order by id
+
+update shopMem set id = '96' where id = '95' 

@@ -49,7 +49,7 @@ Date to = sdformat.parse(today);
 			<td><%if(order.getPdate().compareTo(to)==1){
 				if(order.getState().equals("반품 요청")){
 					%> <span style="color: blue;">신청 중</span> <%
-				}else if (order.getState().equals("주문완료")){
+				}else if (order.getState().equals("배송 완료")){
 			%>
 				<a href="" onclick="modOrder(<%=order.getO_id()%>,'반품 요청')">반품 신청</a>
 				<%}}else{ %>

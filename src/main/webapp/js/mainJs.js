@@ -102,7 +102,7 @@ function openPopupA(link) {
     var _left = Math.ceil(( window.screen.width - _width )/2);
     var _top = Math.ceil(( window.screen.height - _height )/4); 
  
-    window.open(url, 'popup-test', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top );
+    window.open(url, '', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top );
  
 }
 
@@ -443,8 +443,33 @@ function modOrder(id,i) {
 			
 function state(i){
 	for(var k = 0; k<i; k++){
-	if($("#state"+k).text() == '주문완료'){$("#state"+k).css("color","blue");}
+	if($("#state"+k).text() == '배송 완료'){$("#state"+k).css("color","blue");}
 	else if($("#state"+k).text() == '취소 요청' || $("#state"+k).text() == '취소완료'){$("#state"+k).css("color","red");}
 	else if($("#state"+k).text() == '반품 요청'){$("#state"+k).css("color","red");}
 	}
 }			
+
+function deleMem(i) {
+	if(confirm("삭제 하시겠습니까?")==true){
+	$.ajax({
+			  type:'post',
+			  url:'http://localhost:8081/ShoppingMall/DeleteMem', 
+			  async:true,
+			  	data:{
+					  id:i,
+					  }, 
+			  success: function(data){
+			  	alert("삭제 되었습니다.");
+			  	location.reload();
+			  },
+			  error : function() {
+				alert("오류 발생");
+			  }
+			});
+			}
+			}			
+
+function modM(){
+	opener.document.location.reload()
+	window.close();
+}
