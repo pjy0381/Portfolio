@@ -89,7 +89,7 @@ function openPopup(link) {
     var _left = Math.ceil(( window.screen.width - _width )/2);
     var _top = Math.ceil(( window.screen.height - _height )/4); 
  
-    window.open(url, 'popup-test', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top );
+    window.open(url, '', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top );
  
 }
 function openPopupA(link) {
@@ -444,7 +444,7 @@ function modOrder(id,i) {
 function state(i){
 	for(var k = 0; k<i; k++){
 	if($("#state"+k).text() == '배송 완료'){$("#state"+k).css("color","blue");}
-	else if($("#state"+k).text() == '취소 요청' || $("#state"+k).text() == '취소완료'){$("#state"+k).css("color","red");}
+	else if($("#state"+k).text() == '취소 요청' || $("#state"+k).text() == '취소 완료'){$("#state"+k).css("color","red");}
 	else if($("#state"+k).text() == '반품 요청'){$("#state"+k).css("color","red");}
 	}
 }			
@@ -470,6 +470,180 @@ function deleMem(i) {
 			}			
 
 function modM(){
-	opener.document.location.reload()
+	opener.document.location.reload();
 	window.close();
+}
+
+function stateMod(m,i){
+	if(confirm(m+"처리 하시겠습니까?")==true){
+		$.ajax({
+			  type:'post',
+			  url:'http://localhost:8081/ShoppingMall/UpdateState', 
+			  async:true,
+			  	data:{
+					  o_id:i,
+					  message:m
+					  }, 
+			  success: function(data){
+			  	alert("처리 되었습니다.");
+			  	location.reload();
+			  },
+			  error : function() {
+				alert("오류 발생");
+			  }
+			});
+	}
+}
+
+function updateEvent(event,p_id){
+	if(confirm("전송 하시겠습니까?")==true){
+		var sale = 0;
+		if(event=='yes'){
+			sale = $("#_sale"+p_id).val();
+			if(sale == 0){
+				return alert("0%는 설정 할 수 없습니다.");
+			}
+		}
+		$.ajax({
+			  type:'post',
+			  url:'http://localhost:8081/ShoppingMall/UpdateEvent', 
+			  async:true,
+			  	data:{
+					  sale:sale,
+					  event:event,
+					  p_id:p_id
+					  }, 
+			  success: function(data){
+			  	alert("전송 되었습니다.");
+			  	location.reload();
+			  },
+			  error : function() {
+				alert("오류 발생");
+			  }
+			});
+	}
+}
+
+function productReg(size,p_id){
+	for(var i =0; i<size; i++){
+	
+	var formData = new FormData($('#formWithFiles'+i)[0]);
+	formData.append("p_id",p_id)
+
+	$.ajax({
+		url: 'http://localhost:8081/ShoppingMall/DetailImg', 
+		type: 'POST',
+		data: formData,
+ 		processData: false,
+		contentType: false                    // Using FormData, no need to process data.
+		}).done(function(){
+		}).fail(function(){
+			alert("전송 실패");
+		});
+	}
+	$("#formWithFiles").submit();
+}
+
+function addImg(k){
+	var i = $("#quan").val();
+	if(i==k){alert("사진은 4개 까지만 업로드 가능합니다.")}else{
+	$("#formWithFiles"+i).css("display","block");
+	$("#quan").val(parseInt(i)+1);}
+}
+function minusImg(){
+	var i = $("#quan").val();
+	if(i==0){alert("삭제할 목록이 없습니다.")}else{
+	$("#formWithFiles"+(i-1)).css("display","none");
+	$("#quan").val(parseInt(i)-1);}
+}
+
+function deleProduct(i) {
+	if(confirm("삭제 하시겠습니까?")==true){
+	$.ajax({
+			  type:'post',
+			  url:'http://localhost:8081/ShoppingMall/DeleteProduct', 
+			  async:true,
+			  	data:{
+					  id:i,
+					  }, 
+			  success: function(data){
+			  	alert("삭제 되었습니다.");
+			  	location.reload();
+			  },
+			  error : function() {
+				alert("오류 발생");
+			  }
+			});
+			}
+	}			
+
+function selcetVal(p_categori,p_gender,p_color){
+		$("#p_categori").val(p_categori).prop("selected",true)
+		$("#p_gender").val(p_gender).prop("selected",true)
+		$("#p_color").val(p_color).prop("selected",true)
+}
+function alterImg(){
+	var imgurl = $("#filename1").val();
+	$("#mainImg").attr("src", imgurl);
+
+}
+
+function deleImg(i) {
+	if(confirm("삭제 하시겠습니까?")==true){
+	$.ajax({
+			  type:'post',
+			  url:'http://localhost:8081/ShoppingMall/DeleteImg', 
+			  async:true,
+			  	data:{
+					  id:i,
+					  }, 
+			  success: function(data){
+			  	alert("삭제 되었습니다.");
+			  	location.reload();
+			  },
+			  error : function() {
+				alert("오류 발생");
+			  }
+			});
+			}
+	}			
+
+	function productReg(size,p_id){
+	for(var i =0; i<size; i++){
+	
+	var formData = new FormData($('#formWithFiles'+i)[0]);
+	formData.append("p_id",p_id)
+
+	$.ajax({
+		url: 'http://localhost:8081/ShoppingMall/DetailImg', 
+		type: 'POST',
+		data: formData,
+ 		processData: false,
+		contentType: false                    // Using FormData, no need to process data.
+		}).done(function(){
+		}).fail(function(){
+			alert("전송 실패");
+		});
+	}
+	$("#formWithFiles").submit();
+}
+
+function updateProduct(size,p_id){
+	for(var i =0; i<size; i++){
+	
+	var formData = new FormData($('#formWithFiles'+i)[0]);
+	formData.append("p_id",p_id)
+
+	$.ajax({
+		url: 'http://localhost:8081/ShoppingMall/DetailImg', 
+		type: 'POST',
+		data: formData,
+ 		processData: false,
+		contentType: false                    // Using FormData, no need to process data.
+		}).done(function(){
+		}).fail(function(){
+			alert("전송 실패");
+		});
+	}
+	$("#formWithFiles").submit();
 }

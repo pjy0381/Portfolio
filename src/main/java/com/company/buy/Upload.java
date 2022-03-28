@@ -28,11 +28,10 @@ public class Upload extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		  String path = "C:\\JavaWorks2\\ShoppingMall\\src\\main\\webapp\\img\\reviews";
+			String path = "C:\\JavaWorks2\\ShoppingMall\\src\\main\\webapp\\img\\reviews"; // 저장할 경로
 
 		    int size = 1024 * 1024 * 10; // 저장가능한 파일 크기
 		    String file = ""; // 업로드 한 파일의 이름(이름이 변경될수 있다)
-		    String originalFile = ""; // 이름이 변경되기 전 실제 파일 이름
 
 		try {
 			MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
@@ -41,13 +40,11 @@ public class Upload extends HttpServlet {
 	        String str = (String)files.nextElement(); // 파일 이름을 받아와 string으로 저장
 
 	        file = multi.getFilesystemName(str); // 업로드 된 파일 이름 가져옴
-	        originalFile = multi.getOriginalFileName(str); // 원래의 파일이름 가져옴
 	        
 	        request.setCharacterEncoding("utf-8");
 			String p_id = multi.getParameter("p_id");
 			String writer = multi.getParameter("writer");
 			String r_content = multi.getParameter("r_content");
-			System.out.println(file);
 			String r_url = "http://localhost:8081/ShoppingMall/img/reviews/"+file;
 			double r_grade = Double.parseDouble(multi.getParameter("r_grade"));
 			int o_id = Integer.parseInt(multi.getParameter("o_id"));
@@ -100,7 +97,6 @@ public class Upload extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(originalFile);
 		
 		
 	}

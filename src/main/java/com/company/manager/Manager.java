@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.company.bin.MemberBin;
 import com.company.bin.OrderList;
+import com.company.bin.ProductList;
 import com.company.common.JDBCCon;
 
 @WebServlet("/Manager")
@@ -77,8 +78,34 @@ public class Manager extends HttpServlet {
 				mList.add(mem);
 			}
 			
+			rs.close();
+			stmt.close();
+			
+			sql = "select * from tbl_product order by p_id desc";
+			stmt = conn.prepareStatement(sql);
+			
+			rs = stmt.executeQuery();
+			
+			ArrayList<ProductList> pList = new ArrayList<ProductList>();
+			while (rs.next()) {
+				ProductList p = new ProductList();
+				p.setP_id(rs.getInt("p_id"));
+				p.setP_name(rs.getString("p_name"));
+				p.setP_price(rs.getInt("p_price"));
+				p.setP_categori(rs.getString("p_categori"));
+				p.setP_desc(rs.getString("p_desc"));
+				p.setP_url(rs.getString("p_url"));
+				p.setP_color(rs.getString("p_color"));
+				p.setP_gender(rs.getString("p_gender"));
+				p.setEvent(rs.getString("event"));
+				p.setSale(rs.getInt("sale"));
+				p.setP_info(rs.getString("p_info"));
+				pList.add(p);
+			}
+			
 			request.setAttribute("oList", oList);
 			request.setAttribute("mList", mList);
+			request.setAttribute("pList", pList);
 			RequestDispatcher view = request.getRequestDispatcher("managerPage.jsp");
 			view.forward(request, response);
 			

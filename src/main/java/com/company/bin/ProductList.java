@@ -12,6 +12,15 @@ public class ProductList {
 	private int p_sale;
 	private String event;
 	private int sale;
+	private String p_info;
+
+	public String getP_info() {
+		return p_info;
+	}
+
+	public void setP_info(String p_info) {
+		this.p_info = p_info;
+	}
 
 	public int getSale() {
 		return sale;

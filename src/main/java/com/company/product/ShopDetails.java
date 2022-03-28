@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.company.bin.ImgList;
 import com.company.bin.ProductList;
 import com.company.bin.ReviewsList;
 import com.company.common.JDBCCon;
@@ -48,6 +49,7 @@ public class ShopDetails extends HttpServlet {
 			p.setP_gender(rs.getString("p_gender"));
 			p.setEvent(rs.getString("event"));
 			p.setSale(rs.getInt("sale"));
+			p.setP_info(rs.getString("p_info"));
 		}
 		rs.close();
 		stmt.close();
@@ -82,9 +84,28 @@ public class ShopDetails extends HttpServlet {
 			avgG = rs.getDouble(1);
 		}
 		
+		
+		rs.close();
+		stmt.close();
+		
+		sql = "select * from tbl_img where p_id = ?";
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, id);
+		
+		rs = stmt.executeQuery();
+		
+		ArrayList<ImgList> iList = new ArrayList<ImgList>();
+		while(rs.next()) {
+			ImgList img = new ImgList();
+			img.setUrl(rs.getString("url"));
+			img.setP_id(rs.getInt("p_id"));
+			iList.add(img);
+		}
+		
 		request.setAttribute("p", p);
 		request.setAttribute("avgG", avgG);
 		request.setAttribute("rList", rList);
+		request.setAttribute("iList", iList);
 		RequestDispatcher view = request.getRequestDispatcher("shopDetails.jsp");
 		view.forward(request, response);
 		

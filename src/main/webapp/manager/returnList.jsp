@@ -40,7 +40,7 @@ ArrayList<OrderList> oList = (ArrayList<OrderList>) request.getAttribute("oList"
 							<td><%=order.getPrice() %></td>
 							<td><%=order.getState() %></td>
 							<td><%=order.getPdate() %></td>
-							<td align="center"><button class="btn btn-primary" onclick="openPopupA('ShowMem?id=<%=order.getO_id()%>'); return false;" >처리</button></td>
+							<td align="center"><button class="btn btn-primary" onclick="stateMod('주문 확인',<%=order.getO_id() %>); return false;" >처리</button></td>
 						</tr>
 						<%
 								}

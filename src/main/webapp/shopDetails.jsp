@@ -1,3 +1,4 @@
+<%@page import="com.company.bin.ImgList"%>
 <%@page import="com.company.bin.ReviewsList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.company.bin.ProductList"%>
@@ -8,6 +9,7 @@
 double avgG = (double) request.getAttribute("avgG");
 ProductList p = (ProductList) request.getAttribute("p");
 ArrayList<ReviewsList> rList = (ArrayList<ReviewsList>) request.getAttribute("rList");
+ArrayList<ImgList> iList = (ArrayList<ImgList>) request.getAttribute("iList");
 int price = p.getP_price() * (100 - p.getSale()) / 100;
 double number = Math.round((avgG * 100));
 String id = (String)session.getAttribute("id");
@@ -51,7 +53,6 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 	<!-- Product Details Section Begin -->
 	<section class="product-details spad"
 		style="height: auto; padding-bottom: 250px">
-		
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-6">
@@ -61,12 +62,13 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 								src="<%=p.getP_url()%>" alt="">
 						</div>
 						<div class="product__details__pic__slider owl-carousel">
-							<img data-imgbigurl="<%=p.getP_url()%>" src="<%=p.getP_url()%>"
-								alt=""> <img data-imgbigurl="<%=p.getP_url()%>"
-								src="<%=p.getP_url()%>" alt=""> <img
-								data-imgbigurl="<%=p.getP_url()%>" src="<%=p.getP_url()%>"
-								alt=""> <img data-imgbigurl="<%=p.getP_url()%>"
-								src="<%=p.getP_url()%>" alt="">
+						<%
+						if(iList!=null){
+							for(int i =0; i<iList.size();i++){ 
+								ImgList img = iList.get(i);
+						%>
+							<img data-imgbigurl="<%=img.getUrl()%>" src="<%=img.getUrl()%>" alt=""> 
+						<%}} %>
 						</div>
 					</div>
 				</div>
@@ -113,11 +115,7 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 							}
 							%>
 						</div>
-						<p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar
-							a. Vestibulum ac diam sit amet quam vehicula elementum sed sit
-							amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
-							quam vehicula elementum sed sit amet dui. Proin eget tortor
-							risus.</p>
+						<p><%=p.getP_info() %></p>
 						<select class="primary-btn" id="_size"> 
 								<option selected>사이즈 선택</option> 
 								<option value="S">S</option> 
@@ -142,39 +140,24 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 					<div class="product__details__tab">
 						<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item"><a class="nav-link active"
-								data-toggle="tab" href="#tabs-1" role="tab" aria-selected="true">Description</a>
+								data-toggle="tab" href="#tabs-1" role="tab" aria-selected="true">상세 설명</a>
 							</li>
 							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-3" role="tab" aria-selected="false">Reviews <span>(<%=rList.size()%>)
+								href="#tabs-3" role="tab" aria-selected="false">리뷰 <span>(<%=rList.size()%>)
 								</span></a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tabs-1" role="tabpanel">
 								<div class="product__details__tab__desc">
-									<h6>Products Infomation</h6>
-									<p>Vestibulum ac diam sit amet quam vehicula elementum sed
-										sit amet dui. Pellentesque in ipsum id orci porta dapibus.
-										Proin eget tortor risus. Vivamus suscipit tortor eget felis
-										porttitor volutpat. Vestibulum ac diam sit amet quam vehicula
-										elementum sed sit amet dui. Donec rutrum congue leo eget
-										malesuada. Vivamus suscipit tortor eget felis porttitor
-										volutpat. Curabitur arcu erat, accumsan id imperdiet et,
-										porttitor at sem. Praesent sapien massa, convallis a
-										pellentesque nec, egestas non nisi. Vestibulum ac diam sit
-										amet quam vehicula elementum sed sit amet dui. Vestibulum ante
-										ipsum primis in faucibus orci luctus et ultrices posuere
-										cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
-										ullamcorper sit amet ligula. Proin eget tortor risus.</p>
-									<p>Praesent sapien massa, convallis a pellentesque nec,
-										egestas non nisi. Lorem ipsum dolor sit amet, consectetur
-										adipiscing elit. Mauris blandit aliquet elit, eget tincidunt
-										nibh pulvinar a. Cras ultricies ligula sed magna dictum porta.
-										Cras ultricies ligula sed magna dictum porta. Sed porttitor
-										lectus nibh. Mauris blandit aliquet elit, eget tincidunt nibh
-										pulvinar a. Vestibulum ac diam sit amet quam vehicula
-										elementum sed sit amet dui. Sed porttitor lectus nibh.
-										Vestibulum ac diam sit amet quam vehicula elementum sed sit
-										amet dui. Proin eget tortor risus.</p>
+									<p>
+									<%
+									if(iList!=null){
+										for(int i =0; i<iList.size();i++){ 
+											ImgList img = iList.get(i);
+									%>
+										<img src="<%=img.getUrl()%>" alt=""> 
+									<%}} %>
+									</p>
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">

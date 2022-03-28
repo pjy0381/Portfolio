@@ -58,7 +58,7 @@ insert into tbl_product values((select max(p_id) from tbl_product)+1,'헬창화'
 
 insert into tbl_product values((select max(p_id) from tbl_product)+1,'나이키',50000,'shoes','running','http://localhost:8081/ShoppingMall/img/product3.jpg','white','man')
 
-delete from tbl_product where p_id = 6
+delete from tbl_product where p_id =16
 
 insert into tbl_product values((select max(p_id) from tbl_product)+1,'가죽 가방',70000,'etc.','bag','http://localhost:8081/ShoppingMall/img/product4.png','brown','public')
 
@@ -169,7 +169,7 @@ select * from tbl_order order by o_id desc
 
 select nvl(max(o_id),0)+1 from tbl_order
 
-DELETE FROM tbl_order WHERE o_id <=16 and o_id>12
+DELETE FROM tbl_img WHERE p_id = 17
 
 create table tbl_pick(
 	id varchar2(20),
@@ -201,3 +201,30 @@ select sum(price) from tbl_order where pdate>= TO_DATE('2022/03','YYYY/MM') and 
 select * from shopMem order by id
 
 update shopMem set id = '96' where id = '95' 
+
+select * from tbl_product order by p_id desc
+
+update tbl_product set sale = 10, event = 'yes' where p_id = 10
+
+create table tbl_img(
+	id number(20),
+	url varchar2 (1000),
+	p_id number(20),
+	primary key(id)
+)
+
+drop table tbl_img
+
+select * from tbl_img
+
+alter table tbl_product add p_info varchar2(1000)
+
+update tbl_product set p_info = '더 휴먼 상품';
+
+select nvl(max(id),0)+1 from tbl_img
+
+select nvl(max(p_id),0)+1 from tbl_product
+
+insert into tbl_product (p_id,p_name,p_price,p_categori,p_desc,p_url,p_color,p_gender,p_info) values((select nvl(max(p_id),0)+1 from tbl_product),'zz',1000,'z','z','z','z','z','zz')
+
+select * from tbl_product where p_id = 15

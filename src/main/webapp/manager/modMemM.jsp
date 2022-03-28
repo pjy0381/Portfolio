@@ -27,8 +27,8 @@ ArrayList<MemberBin> mList = (ArrayList<MemberBin>) request.getAttribute("mList"
 							<th>전화 번호</th>
 							<th>주소</th>
 							<th>가입 날짜</th>
-							<th>수정</th>
-							<th>삭제</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
