@@ -42,7 +42,7 @@ ArrayList<ProductList> pList = (ArrayList<ProductList>) request.getAttribute("pL
 					<td><%=product.getP_categori() %></td>
 					<td> <span id="event<%=i%>"><%=product.getEvent() %></span></td>
 					<td>
-						<input type="text" class="form-control" style="display: inline-block; width: 80%" value="<%=sale%>" id="_sale<%=product.getP_id()%>">
+						<input type="text" class="form-control" style="display: inline-block; width: 80%" value="<%=sale%>" id="_sale<%=product.getP_id()%>" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
 						<span style="display: none;"><%=sale %></span>
 						<span> % </span>
 					</td>

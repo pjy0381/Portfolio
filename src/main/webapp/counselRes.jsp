@@ -46,7 +46,7 @@ ArrayList<AnswerList> aList = (ArrayList<AnswerList>)request.getAttribute("aList
 					<td style="border: none;"></td>
 					<td style="border: none;"> 
 						<div class="col-md-3 mt-1" style="width: 100%;">
-							<img class="img-fluid img-responsive rounded product-image"src="${counsel.c_url }">
+							<img class="img-fluid img-responsive rounded product-image"src="${counsel.c_url }" onerror="this.parentNode.style.display='none'">
 						</div>
 					 </td>
 					<td style="border: none;"></td>

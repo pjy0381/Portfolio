@@ -691,3 +691,26 @@ function addManager(id,pw){
 			  }
 			});
 }
+function counsel(){
+	if($("#c_categori").val()=='---문의 유형 선택---'||$("#c_categori").val().length==0){
+		alert("문의 유형을 선택하세요");
+		$("#c_categori").focus();
+	}else if($("#o_id").val().length==0){
+		alert("주문 번호를 입력하세요");
+		$("#o_id").focus();
+	}else if($("#id").val().length==0){
+		alert("작성자를 입력하세요");
+		$("#id").focus();
+	}else if($("#phone").val().length==0){
+		alert("연락처를 입력하세요");
+		$("#phone").focus();
+	}else if($("#title").val().length==0){
+		alert("제목을 입력하세요");
+		$("#title").focus();
+	}else if($("#content").val().length==0){
+		alert("내용을 입력하세요");
+		$("#content").focus();
+	}else{
+		$("#counselAdd").submit();
+	}
+}

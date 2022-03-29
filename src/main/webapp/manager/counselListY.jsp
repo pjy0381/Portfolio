@@ -42,7 +42,7 @@ ArrayList<CounselList> cList = (ArrayList<CounselList>) request.getAttribute("cL
 					<td>
 						<div class="col-md-3 mt-1" style="width: 100%;">
 							<a href="ShowCounsel?c_id=<%=coun.getC_id()%>" style="text-decoration: none; color: black;">
-								<img class="img-fluid img-responsive rounded product-image"src="<%=coun.getC_url()%>">
+								<img class="img-fluid img-responsive rounded product-image"src="<%=coun.getC_url()%>" onerror="this.parentNode.style.display='none'">
 							</a>
 						</div>
 					</td>
