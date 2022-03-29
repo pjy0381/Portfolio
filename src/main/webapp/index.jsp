@@ -19,7 +19,7 @@ webApp+=".jsp";
 <body>
 <div class="main">
 	<header class="header"><jsp:include page="header.jsp" /></header>
-	<section ><jsp:include page="<%=webApp%>" /></section>
+	<section style="min-height: 1200px; height: auto; "><jsp:include page="<%=webApp%>" /></section>
 	<footer><jsp:include page="footer.jsp"/></footer>
 </div>
 </body>

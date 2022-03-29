@@ -647,3 +647,47 @@ function updateProduct(size,p_id){
 	}
 	$("#formWithFiles").submit();
 }
+
+function selectO_id(i){
+	opener.document.all.o_id.value = i;
+	window.close();
+}
+
+function answer(i,c_id){
+	var content = $("#content").val()
+	$.ajax({
+			  type:'post',
+			  url:'http://localhost:8081/ShoppingMall/InputAnswer', 
+			  async:true,
+			  	data:{
+					  c_id:c_id,
+					  content:content,
+					  id:i
+					  }, 
+			  success: function(data){
+			  	alert("등록 되었습니다.");
+			  	location.reload();
+			  },
+			  error : function() {
+				alert("오류 발생");
+			  }
+			});
+}
+function addManager(id,pw){
+	$.ajax({
+			  type:'post',
+			  url:'http://localhost:8081/ShoppingMall/AddManger', 
+			  async:true,
+			  	data:{
+					  id:id,
+					  password:pw
+					  }, 
+			  success: function(data){
+			  	alert("추가 되었습니다.");
+			  	location.reload();
+			  },
+			  error : function() {
+				alert("오류 발생");
+			  }
+			});
+}

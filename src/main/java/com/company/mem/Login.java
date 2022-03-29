@@ -33,7 +33,21 @@ public class Login extends HttpServlet {
 		
 		try {
 			conn = JDBCCon.getConnection();
-			String sql = "select * from shopMem where id = ? and password = ?";
+			String sql = "select * from tbl_manager where id = ? and password = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			stmt.setString(2, password);
+			
+			rs=stmt.executeQuery();
+			if(rs.next()) {
+				String power = "yes";
+				HttpSession session = request.getSession();
+				session.setAttribute("power", power);
+			}
+			rs.close();
+			stmt.close();
+			
+			sql = "select * from shopMem where id = ? and password = ?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, id);
 			stmt.setString(2, password);

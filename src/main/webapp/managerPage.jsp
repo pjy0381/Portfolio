@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%String mod = "main";
+String power = (String)session.getAttribute("power");
+if(power==null||!power.equals("yes")){response.sendRedirect("index.jsp");}
 if(request.getParameter("mod")!=null){ mod = request.getParameter("mod");}
 String url = "manager/"+mod+".jsp";
 %>

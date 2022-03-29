@@ -11,6 +11,13 @@ public class MemberBin {
 	private Date reg;
 	private String nAd;
 	private String dAd;
+	private String grade;
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 	public String getId() {
 		return id;
 	}

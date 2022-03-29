@@ -11,6 +11,8 @@ ArrayList<ProductList> pList = (ArrayList<ProductList>) request.getAttribute("pL
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="css/ManagerStyles.css" rel="stylesheet" />
 </head>
 <body>
 	<div class="card-body">
@@ -37,7 +39,9 @@ ArrayList<ProductList> pList = (ArrayList<ProductList>) request.getAttribute("pL
 				<tr>
 					<td>
 						<div class="col-md-3 mt-1" style="width: 100%;">
-							<img class="img-fluid img-responsive rounded product-image"src="<%=product.getP_url()%>">
+							<a href="ShopDetails?id=<%=product.getP_id()%>" style="text-decoration: none; color: black;">
+								<img class="img-fluid img-responsive rounded product-image"src="<%=product.getP_url()%>">
+							</a>
 						</div>
 					</td>
 					<td><%=product.getP_id()%></td>

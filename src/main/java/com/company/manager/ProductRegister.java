@@ -30,7 +30,6 @@ public class ProductRegister extends HttpServlet {
 
 		int size = 1024 * 1024 * 10; // 저장가능한 파일 크기
 		String file = ""; // 업로드 한 파일의 이름(이름이 변경될수 있다)
-		System.out.println(file);
 
 		try {
 			

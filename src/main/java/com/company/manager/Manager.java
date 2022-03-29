@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.company.bin.CounselList;
 import com.company.bin.MemberBin;
 import com.company.bin.OrderList;
 import com.company.bin.ProductList;
@@ -59,7 +60,7 @@ public class Manager extends HttpServlet {
 			rs.close();
 			stmt.close();
 			
-			sql = "select * from shopMem order by reg desc";
+			sql = "select * from shopMem order by reg";
 			stmt = conn.prepareStatement(sql);
 			
 			rs = stmt.executeQuery();
@@ -75,6 +76,7 @@ public class Manager extends HttpServlet {
 				mem.setReg(rs.getDate("reg"));
 				mem.setnAd(rs.getString("nAd"));
 				mem.setdAd(rs.getString("dAd"));
+				mem.setGrade(rs.getString("grade"));
 				mList.add(mem);
 			}
 			
@@ -102,10 +104,34 @@ public class Manager extends HttpServlet {
 				p.setP_info(rs.getString("p_info"));
 				pList.add(p);
 			}
+			rs.close();
+			stmt.close();
+			
+			sql = "select * from tbl_counsel order by reg";
+			stmt = conn.prepareStatement(sql);
+			
+			rs = stmt.executeQuery();
+			
+			ArrayList<CounselList> cList = new ArrayList<CounselList>();
+			while(rs.next()) {
+				CounselList counsel = new CounselList();
+				counsel.setC_id(rs.getInt("c_id"));
+				counsel.setC_categori(rs.getString("c_categori"));
+				counsel.setO_id(rs.getInt("o_id"));
+				counsel.setId(rs.getString("id"));
+				counsel.setPhone(rs.getString("phone"));
+				counsel.setTitle(rs.getString("title"));
+				counsel.setContent(rs.getString("content"));
+				counsel.setC_url(rs.getString("c_url"));
+				counsel.setC_state(rs.getString("c_state"));
+				counsel.setReg(rs.getDate("reg"));
+				cList.add(counsel);
+			}
 			
 			request.setAttribute("oList", oList);
 			request.setAttribute("mList", mList);
 			request.setAttribute("pList", pList);
+			request.setAttribute("cList", cList);
 			RequestDispatcher view = request.getRequestDispatcher("managerPage.jsp");
 			view.forward(request, response);
 			

@@ -6,19 +6,6 @@
 <%!@SuppressWarnings("unchecked")%>
 <%
 ArrayList<BasketList> basketList = (ArrayList<BasketList>) session.getAttribute("basketList");
-String name = (String) session.getAttribute("name");
-String id = (String) session.getAttribute("id");
-String address = (String) session.getAttribute("address");
-String nad = (String) session.getAttribute("nad");
-String dad = (String) session.getAttribute("dad");
-String phone = (String) session.getAttribute("phone");
-if (name == null) {
-	name = "";
-	address = "";
-	nad = "";
-	dad = "";
-	phone = "";
-}
 %>
 <!DOCTYPE html>
 <html>
@@ -71,15 +58,15 @@ if (name == null) {
 				</div>
 				<div style="disply: none;">
 					<form action="NewOrder" id="NewOrder<%=i %>" method="post">
-						<input type="hidden" value="<%=id %>" name="id" id="id<%=i%>">
-						<input type="hidden" value="<%=bas.getP_id() %>" name="p_id" id="p_id<%=i%>">
-						<input type="hidden" value="<%=name %>" name="name" id="name<%=i%>">
-						<input type="hidden" value="<%=bas.getName() %>" name="o_name" id="o_name<%=i%>">
-						<input type="hidden" value="<%=phone %>" name="phone" id="phone<%=i%>">
-						<input type="hidden" value="<%=nad %>" name="nAd" id="nAd<%=i%>">
-						<input type="hidden" value="<%=address %>" name="address" id="address<%=i%>">
-						<input type="hidden" value="<%=dad %>" name="dAd" id="dAd<%=i%>">
-						<input type="hidden" value="<%=bas.getPrice()*bas.getQuantity() %>" name="price" id="price<%=i%>">
+						<input type="hidden" value="${id }" id="id<%=i%>">
+						<input type="hidden" value="<%=bas.getP_id() %>"  id="p_id<%=i%>">
+						<input type="hidden" value="${name }"  id="name<%=i%>">
+						<input type="hidden" value="<%=bas.getName() %>" id="o_name<%=i%>">
+						<input type="hidden" value="${phone }"  id="phone<%=i%>">
+						<input type="hidden" value="${nAd }"  id="nAd<%=i%>">
+						<input type="hidden" value="${address }"  id="address<%=i%>">
+						<input type="hidden" value="${dAd }" id="dAd<%=i%>">
+						<input type="hidden" value="<%=bas.getPrice()*bas.getQuantity() %>" id="price<%=i%>">
 					</form>
 				</div>
 			</div>
@@ -96,32 +83,32 @@ if (name == null) {
 			<table class="table" style="text-align: left;">
 				<tr>
 					<td>받으시는 분:</td>
-					<td><input type="text" name="name" value="<%=name%>"
+					<td><input type="text" name="name" value="${name }"
 						class="form-control"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>연락처:</td>
-					<td><input type="text" name="phone" value="<%=phone%>"
+					<td><input type="text" name="phone" value="${phone }"
 						class="form-control"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>배송 주소:</td>
-					<td><input type="text" name="nAd" value="<%=nad%>"
+					<td><input type="text" name="nAd" value="${nad }"
 						class="form-control"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input name="address" type="text" value="<%=address%>"
+					<td><input name="address" type="text" value="${address }"
 						class="form-control"></td>
 					<td><button class="btn btn-primary"
 							onclick="openPopupA('address.jsp'); return false;">검색</button></td>
 				</tr>
 				<tr>
 					<td>상세 주소:</td>
-					<td><input type="text" name="dAd" value="<%=dad%>"
+					<td><input type="text" name="dAd" value="${dad }"
 						class="form-control"></td>
 					<td></td>
 				</tr>

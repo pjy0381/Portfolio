@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.company.bin.CounselList;
 import com.company.bin.MemberBin;
 import com.company.bin.OrderList;
 import com.company.bin.WishList;
@@ -103,9 +104,34 @@ public class MyPageInfo extends HttpServlet {
 					wList.add(wish);
 				}
 				
+				rs.close();
+				stmt.close();
+				
+				sql = "select * from tbl_counsel where id = ? order by c_id desc";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, id);
+				
+				rs = stmt.executeQuery();
+				
+				ArrayList<CounselList> cList = new ArrayList<CounselList>();
+				while(rs.next()) {
+					CounselList counsel = new CounselList();
+					counsel.setC_id(rs.getInt("c_id"));
+					counsel.setC_categori(rs.getString("c_categori"));
+					counsel.setO_id(rs.getInt("o_id"));
+					counsel.setId(rs.getString("id"));
+					counsel.setPhone(rs.getString("phone"));
+					counsel.setTitle(rs.getString("title"));
+					counsel.setContent(rs.getString("content"));
+					counsel.setC_url(rs.getString("c_url"));
+					counsel.setC_state(rs.getString("c_state"));
+					counsel.setReg(rs.getDate("reg"));
+					cList.add(counsel);
+				}
 				request.setAttribute("mem", mem);
 				request.setAttribute("oList", oList);
 				request.setAttribute("wList", wList);
+				request.setAttribute("cList", cList);
 				RequestDispatcher view = request.getRequestDispatcher("index.jsp?webApp=myPage");
 				view.forward(request, response);
 				

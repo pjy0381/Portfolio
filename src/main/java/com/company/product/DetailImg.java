@@ -52,17 +52,19 @@ public class DetailImg extends HttpServlet {
 			try {
 				conn = JDBCCon.getConnection();
 				String sql = "select nvl(max(p_id),0)+1 from tbl_product";
-				stmt  = conn.prepareStatement(sql);
-				
 				if(p_id == 0) {
+					stmt  = conn.prepareStatement(sql);
+				
+				
 					rs = stmt.executeQuery();
 					if(rs.next()) {
 						p_id = rs.getInt(1);
 	
 					}
+					stmt.close();
+					rs.close();
 				}
-				stmt.close();
-				rs.close();
+
 				
 				sql = "insert into tbl_img(url,p_id,id) values(?,?,(select nvl(max(id),0)+1 from tbl_img))";
 				stmt = conn.prepareStatement(sql);

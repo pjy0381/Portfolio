@@ -13,7 +13,7 @@
         <li><a href="MyPageInfo?view=orderList">주문 내역</a></li>
         <li><a href="MyPageInfo?view=cancle">취소/반품</a></li>
         <li><a href="MyPageInfo?view=wishList">위시리스트</a></li>
-        <li><a>문의 사항</a></li>
+        <li><a href="MyPageInfo?view=counsel">1:1 문의</a></li>
       </ul>
       <br>
     </div>

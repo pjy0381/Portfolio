@@ -5,6 +5,7 @@
 	<%!@SuppressWarnings("unchecked")%>
 <%String name = (String)session.getAttribute("name"); 
 String id = (String)session.getAttribute("id");
+String power = (String)session.getAttribute("power");
 String password = (String)session.getAttribute("password");
 ArrayList<BasketList> basketList = (ArrayList<BasketList>) session.getAttribute("basketList");
 if(basketList==null){basketList = new ArrayList<BasketList>();}
@@ -25,9 +26,13 @@ if(basketList==null){basketList = new ArrayList<BasketList>();}
 		</ul>
 		<%}else{ %>
 		<ul>
+			<%if(power!=null&&power.equals("yes")){ %>
+			<li><a href="Manager">관리</a></li>
+			<%} %>
 			<li><a href="basketList.jsp">장바구니( <span style="color: red;"><%=basketList.size() %></span> )</a></li>
 			<li><a href="MyPageInfo"><%=name %></a></li>
 			<li><a href="Logout">로그아웃</a></li>
+
 		</ul>
 		<%} %>
 	</div>

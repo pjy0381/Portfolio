@@ -20,8 +20,10 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Manager?mod=addManager">관리자 등록</a>
                                     <a class="nav-link" href="Manager?mod=modMemM">회원 수정/삭제</a>
-                                    <a class="nav-link" href="#">문의 사항</a>
+                                    <a class="nav-link" href="Manager?mod=counselListN">문의 사항</a>
+                                    <a class="nav-link" href="Manager?mod=counselListY">답변 완료</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -61,7 +63,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">관리자 : </div>
-                        관리자 명
+                        ${name }
                     </div>
                 </nav>
             </div>

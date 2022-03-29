@@ -33,7 +33,7 @@ insert into shopMem (id,password,name,phone,address,nAd,dAd) values('zz','zz','z
 
 select * from shopMem
 
-update shopMem set password = '123' where id = 'abc' and name = '홍길동'
+update shopMem set grade = 'manager' where id = 'abcd' 
 
 create table tbl_product(
 	p_id number(20),
@@ -228,3 +228,44 @@ select nvl(max(p_id),0)+1 from tbl_product
 insert into tbl_product (p_id,p_name,p_price,p_categori,p_desc,p_url,p_color,p_gender,p_info) values((select nvl(max(p_id),0)+1 from tbl_product),'zz',1000,'z','z','z','z','z','zz')
 
 select * from tbl_product where p_id = 15
+
+update tbl_product set p_name = 'zz', p_price = 16, p_categori = 'zz', p_gender = 'zz', p_color = 'zz', p_info = 'zz' where  p_id = 16
+
+create table tbl_counsel(
+	c_id number(20),
+	c_categori varchar2(50),
+	o_id number(20),
+	id varchar2(50),
+	phone varchar2(50),
+	title varchar2(50),
+	content varchar2(500),
+	c_url varchar2(500),
+	c_state varchar2(50) default '답변 대기',
+	reg date default sysdate,
+	primary key(c_id)
+) 
+
+drop table tbl_counsel
+
+select c_id from tbl_counsel
+
+create table tbl_answer(
+	content varchar2(200),
+	c_id number(30),
+	reg date default sysdate,
+	id varchar2(50)
+) 
+
+drop table tbl_answer
+
+select * from tbl_answer;
+
+create table tbl_manager(
+	id varchar2(20),
+	password varchar2(30),
+	primary key(id)
+)
+
+
+select * from tbl_manager
+insert into tbl_manager values('abcd','1234')
