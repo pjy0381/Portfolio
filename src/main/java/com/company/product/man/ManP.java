@@ -23,9 +23,14 @@ public class ManP extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String categori = request.getParameter("categori");
+		String categori = "%%";
+		if(request.getParameter("categori") != null) { categori = request.getParameter("categori");}
 		int page = 1;
 		if(request.getParameter("page") !=null) {page = Integer.parseInt(request.getParameter("page"));}
+		String p_desc = "%%";
+		if(request.getParameter("p_desc") != null) { p_desc = request.getParameter("p_desc");}
+		String p_color = "%%";
+		if(request.getParameter("p_color") != null) { p_color = request.getParameter("p_color");}
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -34,22 +39,15 @@ public class ManP extends HttpServlet {
 		try {
 			conn = JDBCCon.getConnection();
 			
-			String sql =  "select * from (select rownum as rnum,B.* from (select * from tbl_product where p_gender in(?,?) order by p_id desc) B) where rnum between ? and ?";
-			if(categori != null) {
-				sql = "select * from (select rownum as rnum,B.* from (select * from tbl_product where p_gender in(?,?) and p_categori = ? order by p_id desc) B) where rnum between ? and ?" ;
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, "public");
-				stmt.setString(2,"man");
-				stmt.setString(3, categori);
-				stmt.setInt(4, page * 12 - 11);
-				stmt.setInt(5, page * 12);
-			}else {
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, "public");
-				stmt.setString(2,"man");
-				stmt.setInt(3, page * 12 - 11);
-				stmt.setInt(4, page * 12);
-			}
+			String sql = "select * from (select rownum as rnum,B.* from (select * from tbl_product where p_gender in(?,?) and p_categori like ? and p_desc like ? and p_color like ? order by p_id desc) B) where rnum between ? and ?" ;
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, "public");
+			stmt.setString(2,"man");
+			stmt.setString(3, categori);
+			stmt.setString(4, p_desc);
+			stmt.setString(5, p_color);
+			stmt.setInt(6, page * 12 - 11);
+			stmt.setInt(7, page * 12);
 
 			rs = stmt.executeQuery();
 			
@@ -73,20 +71,15 @@ public class ManP extends HttpServlet {
 			stmt.close();
 			rs.close();
 			
-			if(categori != null) {
-			sql = "select count(p_id) from tbl_product where p_gender in (?, ?) and p_categori = ?";
+			sql = "select count(p_id) from tbl_product where p_gender in (?, ?) and p_categori like ? and p_desc like ? and p_color like ? ";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, "public");
 			stmt.setString(2,"man");
 			stmt.setString(3, categori);
+			stmt.setString(4, p_desc);
+			stmt.setString(5, p_color);
 			rs = stmt.executeQuery();
-			}else {
-				sql = "select count(p_id) from tbl_product where p_gender in (?, ?)";
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, "public");
-				stmt.setString(2,"man");
-				rs = stmt.executeQuery();
-			}
+			
 			int totalCount = 0; // 전체 게시글 수 담는 변수
 			if (rs.next()) {
 				totalCount = rs.getInt(1);
@@ -94,7 +87,7 @@ public class ManP extends HttpServlet {
 			
 			request.setAttribute("totalCount", totalCount);
 			request.setAttribute("pList", pList);
-			request.setAttribute("categori", categori);
+			if(request.getParameter("categori") != null) {request.setAttribute("categori", categori);}
 			RequestDispatcher view = request.getRequestDispatcher("manPage.jsp");
 			view.forward(request, response);
 

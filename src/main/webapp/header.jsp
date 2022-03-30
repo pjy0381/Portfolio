@@ -1,15 +1,6 @@
-<%@page import="com.company.bin.BasketList"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%!@SuppressWarnings("unchecked")%>
-<%String name = (String)session.getAttribute("name"); 
-String id = (String)session.getAttribute("id");
-String power = (String)session.getAttribute("power");
-String password = (String)session.getAttribute("password");
-ArrayList<BasketList> basketList = (ArrayList<BasketList>) session.getAttribute("basketList");
-if(basketList==null){basketList = new ArrayList<BasketList>();}
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,23 +9,25 @@ if(basketList==null){basketList = new ArrayList<BasketList>();}
 </head>
 <body>
 	<div class="main_user">
-	<%if(name==null){ %>
+	<c:choose>
+		<c:when test="${name==null }">
+			<ul>
+				<li><a href="basketList.jsp"> 장바구니( <span style="color: red;">${basketList.size() }</span> )</a></li>
+				<li><a href="index.jsp?webApp=register">회원 가입</a></li>
+				<li><a href="index.jsp?webApp=login">로그인</a></li>
+			</ul>
+		</c:when>
+		<c:otherwise>
 		<ul>
-			<li><a href="basketList.jsp"> 장바구니( <span style="color: red;"><%=basketList.size() %></span> )</a></li>
-			<li><a href="index.jsp?webApp=register">회원 가입</a></li>
-			<li><a href="index.jsp?webApp=login">로그인</a></li>
-		</ul>
-		<%}else{ %>
-		<ul>
-			<%if(power!=null&&power.equals("yes")){ %>
-			<li><a href="Manager">관리</a></li>
-			<%} %>
-			<li><a href="basketList.jsp">장바구니( <span style="color: red;"><%=basketList.size() %></span> )</a></li>
-			<li><a href="MyPageInfo"><%=name %></a></li>
+			<c:if test="${power !=null && power == 'yes' }">
+				<li><a href="Manager">관리</a></li>
+			</c:if>
+			<li><a href="basketList.jsp">장바구니( <span style="color: red;">${basketList.size() }</span> )</a></li>
+			<li><a href="MyPageInfo">${name }</a></li>
 			<li><a href="Logout">로그아웃</a></li>
-
-		</ul>
-		<%} %>
+		</ul>	
+		</c:otherwise>
+	</c:choose>
 	</div>
 	<div class="shop_menu">
 		<div class="logo">

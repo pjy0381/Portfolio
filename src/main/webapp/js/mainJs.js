@@ -210,23 +210,14 @@ function modifyA() {
 }
 function descSearch() {
 	var _color=$("#_color").val();
-	
-	$.ajax({
-			  type:'get',
-			  url:'http://localhost:8081/ShoppingMall/DescP',
-			  data:{
-				  color:_color,
-				  }, 
-			  async:true,
-			  success: function(data){
-			  	var arr = data		
-			  	alert(arr);
-			  	location.reload();
-			  },
-			  error : function() {
-				alert("수정 실패");
-			  }
-			});
+	var url = location.href;
+	if(url.split('?').length==1){
+		url+="?p_color="
+	}else{
+		url+='&p_color=';
+	}
+	url+=_color;
+	location.href = url;
 }
 
 function totalR(i) {

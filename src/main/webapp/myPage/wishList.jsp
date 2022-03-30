@@ -1,13 +1,6 @@
-<%@page import="com.company.bin.WishList"%>
-<%@page import="java.util.Date"%>
-<%@page import="com.company.bin.OrderList"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>
-<%
-ArrayList<WishList> wList = (ArrayList<WishList>) request.getAttribute("wList");
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    	
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,20 +19,14 @@ ArrayList<WishList> wList = (ArrayList<WishList>) request.getAttribute("wList");
 			</tr>
 		</thead>
 		<tbody>
-		<%
-		if (wList != null) {
-			for (int i = 0; i < wList.size(); i++) {
-				WishList wish = wList.get(i);
-		%>
-		<tr>
-			<td><%=i+1 %></td>
-			<td><a href="ShopDetails?id=<%=wish.getP_id()%>"><%=wish.getP_name()%></a></td>
-			<td><%=wish.getIp()%></td>
-			<td><%=wish.getP_id() %></td>
-		</tr>
-		<%
-		}	}
-		%>
+		<c:forEach items="${wList }" var="wish" varStatus="i">
+			<tr>
+				<td>${i.count+1 }</td>
+				<td><a href="ShopDetails?id=${wish.p_id }">${wish.p_name }</a></td>
+				<td>${wish.ip }</td>
+				<td>${wish.p_id }</td>
+			</tr>
+		</c:forEach>
 		</tbody>
 	</table>
 </body>

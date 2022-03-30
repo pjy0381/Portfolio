@@ -1,12 +1,8 @@
-<%@page import="com.company.bin.BasketList"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>
-<%ArrayList<BasketList> basketList = (ArrayList<BasketList>) session.getAttribute("basketList");
-if(basketList == null){basketList = new ArrayList<BasketList>(); }
-int total=0;
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<c:set var="total" value="0"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,35 +51,30 @@ int total=0;
                                 </tr>
                             </thead>
                             <tbody>
-                            <%if(basketList!=null){
-                           		for(int i = 0; i<basketList.size(); i++){
-                            	BasketList bas = basketList.get(i);
-                            	%>
-                                <tr>
+                            <c:forEach items="${basketList }" var="bas" varStatus="i">
+                             <tr>
                                     <td class="col-md-3 mt-1" >
-                                        <img src="<%=bas.getUrl() %>" alt="" class="img-fluid img-responsive rounded product-image">
-                                        <h5><%=bas.getName()%></h5>
+                                        <img src="${bas.url }" alt="" class="img-fluid img-responsive rounded product-image">
+                                        <h5>${bas.name }</h5>
                                     </td>
                                     <td class="shoping__cart__price" >
-                                         &#8361;<%=bas.getPrice() %>
+                                        <c:set var="num" value="${bas.price }"/>
+										<fmt:setLocale value="ko_kr"/>
+										<fmt:formatNumber value="${num }" groupingUsed="true" type="currency"/>
                                     </td>
-                                    <td class="shoping__cart__price">
-                                       <%=bas.getSize()%>
-                                    </td>
-                                    <td >
-                                    	<b><%=bas.getQuantity() %></b>
-                                    </td>
+                                    <td class="shoping__cart__price">${bas.size }</td>
+                                    <td ><b>${bas.quantity }</b></td>
                                     <td class="shoping__cart__total">
-                                         &#8361;<%=bas.getPrice()*bas.getQuantity() %>
+                                        <c:set var="price" value="${bas.price*bas.quantity }"/>
+										<fmt:setLocale value="ko_kr"/>
+										<fmt:formatNumber value="${price }" groupingUsed="true" type="currency"/>
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        <span class="bi bi-x" onclick="dropBasket(<%=i%>);return false;"></span>
+                                        <span class="bi bi-x" onclick="dropBasket(${i});return false;"></span>
                                     </td>
+                                    <c:set var="total" value="${total+price }"/>
                                 </tr>
-                                <%
-                                total +=bas.getPrice()*bas.getQuantity();
- 								}} 
-                            %>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -100,13 +91,16 @@ int total=0;
                     <div class="shoping__checkout" align="left" >
                         <h5>가격 총합</h5>
                         <ul >
-                            <li>가격 <span id="total">&#8361;<%=total%></span></li>
+                            <li>가격 <span id="total">
+                            	<fmt:setLocale value="ko_kr"/>
+								<fmt:formatNumber value="${total }" groupingUsed="true" type="currency"/>
+                            </span></li>
                         </ul>
                     </div>
                 </div>
                	<div class="shoping__discount" >
                		<form action="">
-                		<a class="site-btn" style="margin: 10px; margin-top: 30px" onclick="movePay(<%=basketList.size()%>);return false" >결제하기</a>
+                		<a class="site-btn" style="margin: 10px; margin-top: 30px" onclick="movePay(${basketList.size()});return false" >결제하기</a>
 					</form>
                 </div>
             </div>

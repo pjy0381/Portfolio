@@ -4,7 +4,7 @@
 		int totalCount=Integer.parseInt(request.getParameter("totalCount"));
 		int pg=Integer.parseInt(request.getParameter("pg"));
 		String gender = request.getParameter("gender");
-		int countList = 10; // 한 페이지에 출력될 게시물 수(10개를 기준으로 잡음)
+		int countList = 12; // 한 페이지에 출력될 게시물 수(10개를 기준으로 잡음)
 		int countPage = 10; // 한 화면에 출력될 페이지 수(통상적으로 10개 페이지를 나오게 함)
 		int totalPage = totalCount / countList; // totalPage는 전체 페이지 수 (전체 게시물 / 한 페이지에 출력될 게시물 수)
 		

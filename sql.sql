@@ -62,7 +62,7 @@ delete from tbl_product where p_id =16
 
 insert into tbl_product values((select max(p_id) from tbl_product)+1,'가죽 가방',70000,'etc.','bag','http://localhost:8081/ShoppingMall/img/product4.png','brown','public')
 
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'검은 티',7000,'top','t-shirt','http://localhost:8081/ShoppingMall/img/product5.png','black','public')
+insert into tbl_product values((select max(p_id) from tbl_product)+1,'검은 티',7000,'top','t-shirt','http://localhost:8081/ShoppingMall/img/product5.png','black','public','zz',0,'xx')
 
 insert into tbl_product values((select max(p_id) from tbl_product)+1,'청 반바지',40000,'bottom','jean','http://localhost:8081/ShoppingMall/img/product6.jpg','blue','man')
 
@@ -84,7 +84,7 @@ insert into tbl_product values((select max(p_id) from tbl_product)+1,'후드티'
 
 insert into tbl_product values((select max(p_id) from tbl_product)+1,'다크진',80000,'bottom','jean','http://localhost:8081/ShoppingMall/img/product15.jpg','black','public')
 
-select * from tbl_product
+select count(p_id) from tbl_product where p_gender = 'man' or p_gender = 'public'
 
 update tbl_product set p_name = '시계 펜던트' where  p_id = 11;
 
@@ -269,3 +269,5 @@ create table tbl_manager(
 
 select * from tbl_manager
 insert into tbl_manager values('abcd','1234')
+
+select * from tbl_product where p_gender in('man','public') and p_desc like '%%' order by p_id desc

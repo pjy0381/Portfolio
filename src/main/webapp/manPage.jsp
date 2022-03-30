@@ -24,6 +24,8 @@ if (request.getParameter("page") != null) {
 <head>
 <meta charset="UTF-8">
 <title>남성</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript" src="js/mainJs.js"></script>
 </head>
 	<link href="css/mainStyle.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet"href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
@@ -32,7 +34,7 @@ if (request.getParameter("page") != null) {
 <div class="main">
 	<header class="header"><jsp:include page="header.jsp"/></header>
 	<section class="sideProduct" > <jsp:include page="<%=url %>"/> </section>
-	<section style="height: auto; float: left; width: 80%"><jsp:include page="man/manPage.jsp"/>
+	<section style="height: auto; float: left; width: 80%" id="se"><jsp:include page="man/manPage.jsp"/>
 	</section>
 	<div class="paging">
 		<jsp:include page="page/getPage.jsp">
@@ -41,8 +43,8 @@ if (request.getParameter("page") != null) {
 			<jsp:param value="<%=gender%>" name="gender" />
 		</jsp:include>
 	</div>
-	
 	<footer><jsp:include page="footer.jsp"/></footer>
+	
 </div>
 </body>
 </html>
