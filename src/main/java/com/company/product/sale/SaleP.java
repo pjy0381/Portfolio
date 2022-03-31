@@ -23,9 +23,14 @@ public class SaleP extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String categori = request.getParameter("categori");
+		String categori = "%%";
+		if(request.getParameter("categori") != null) { categori = request.getParameter("categori");}
 		int page = 1;
 		if(request.getParameter("page") !=null) {page = Integer.parseInt(request.getParameter("page"));}
+		String p_desc = "%%";
+		if(request.getParameter("p_desc") != null) { p_desc = request.getParameter("p_desc");}
+		String p_color = "%%";
+		if(request.getParameter("p_color") != null) { p_color = request.getParameter("p_color");}
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -33,23 +38,18 @@ public class SaleP extends HttpServlet {
 		
 		try {
 			conn = JDBCCon.getConnection();
-			String sql =  "select * from (select rownum as rnum,B.* from (select * from tbl_product where event = ? order by p_id desc) B) where rnum between ? and ?";
-			if(categori != null) {
-				sql = "select * from (select rownum as rnum,B.* from (select * from tbl_product where event = ? and p_categori = ? order by p_id desc) B) where rnum between ? and ?" ;
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, "yes");
-				stmt.setString(2, categori);
-				stmt.setInt(3, page * 12 - 11);
-				stmt.setInt(4, page * 12);
-			}else {
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, "yes");
-				stmt.setInt(2, page * 12 - 11);
-				stmt.setInt(3, page * 12);
-			}
+			
+			String sql = "select * from (select rownum as rnum,B.* from (select * from tbl_product where p_categori like ? and p_desc like ? and p_color like ? and event = ? order by p_id desc) B) where rnum between ? and ?" ;
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, categori);
+			stmt.setString(2, p_desc);
+			stmt.setString(3, p_color);
+			stmt.setString(4, "yes");
+			stmt.setInt(5, page * 12 - 11);
+			stmt.setInt(6, page * 12);
 
 			rs = stmt.executeQuery();
-
+			
 			ArrayList<ProductList> pList = new ArrayList<ProductList>();
 			while (rs.next()) {
 				ProductList p = new ProductList();
@@ -70,18 +70,14 @@ public class SaleP extends HttpServlet {
 			stmt.close();
 			rs.close();
 			
-			if(categori != null) {
-			sql = "select count(p_id) from tbl_product where event = ? and p_categori = ?";
+			sql = "select count(p_id) from tbl_product where p_categori like ? and p_desc like ? and p_color like ? and event = ?";
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, "yes");
-			stmt.setString(2, categori);
+			stmt.setString(1, categori);
+			stmt.setString(2, p_desc);
+			stmt.setString(3, p_color);
+			stmt.setString(4, "yes");
 			rs = stmt.executeQuery();
-			}else {
-				sql = "select count(p_id) from tbl_product where event = ?";
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, "yes");
-				rs = stmt.executeQuery();
-			}
+			
 			int totalCount = 0; // 전체 게시글 수 담는 변수
 			if (rs.next()) {
 				totalCount = rs.getInt(1);
@@ -92,7 +88,7 @@ public class SaleP extends HttpServlet {
 			request.setAttribute("categori", categori);
 			RequestDispatcher view = request.getRequestDispatcher("salePage.jsp");
 			view.forward(request, response);
-
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

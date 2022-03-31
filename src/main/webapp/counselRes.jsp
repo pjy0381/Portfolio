@@ -1,13 +1,6 @@
-<%@page import="com.company.bin.AnswerList"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.company.bin.CounselList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>	
-<%String id = (String)session.getAttribute("id"); 
-String power = (String)session.getAttribute("power"); 
-ArrayList<AnswerList> aList = (ArrayList<AnswerList>)request.getAttribute("aList");
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,22 +44,20 @@ ArrayList<AnswerList> aList = (ArrayList<AnswerList>)request.getAttribute("aList
 					 </td>
 					<td style="border: none;"></td>
 				</tr>
-				<%if(aList!=null){
-					for(int i = 0; i<aList.size();i++){
-						AnswerList a = aList.get(i);
-					%>
+				<c:forEach items="${aList }" var="a" >
 					<tr>
-						<td>작성자 : <%=a.getId() %></td>
-						<td align="left">답변 : <%=a.getContent() %></td>
-						<td>작성일 : <%=a.getReg() %></td>
+						<td>작성자 : ${a.id }</td>
+						<td align="left">답변 : ${a.content }</td>
+						<td>작성일 : ${a.reg }</td>
 					</tr>
-				<%}} 
-				if(power!=null&&power.equals("yes")){%>
-				<tr>
-					<td colspan="2" align="left" ><textarea rows="" cols="" class="form-control" id="content"></textarea></td>
-					<td ><input type="button" value="답변하기" class="btn btn-primary" onclick="answer('<%=id%>','${counsel.c_id }')"></td>
-				</tr>
-				<%} %>
+				</c:forEach>	
+				<c:if test="${power == 'yes' }">
+					<tr>
+						<td colspan="2" align="left" ><textarea rows="" cols="" class="form-control" id="content"></textarea></td>
+						<td ><input type="button" value="답변하기" class="btn btn-primary" onclick="answer('${sessionScope.id }','${counsel.c_id }')"></td>
+					</tr>
+				</c:if>
+				
 			</tbody>
 		</table>
 	</section>

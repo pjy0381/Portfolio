@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-String name = (String) request.getAttribute("name");
-if (name == null)
-	name = "";
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +12,11 @@ if (name == null)
 		<table class="table">
 			<tr>
 				<td><input name="name" class="form-control"
-					placeholder="이름을 입력하세요" value="<%=name%>"></td>
+					placeholder="이름을 입력하세요" value="${name }"></td>
 			</tr>
 			<tr>
 				<td><input name="id" class="form-control"
-					placeholder="아이디를 입력하세요" value="<%=name%>"></td>
+					placeholder="아이디를 입력하세요" value="${name }"></td>
 			</tr>
 			<tr>
 				<td>

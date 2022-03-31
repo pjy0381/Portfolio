@@ -1,13 +1,6 @@
-<%@page import="com.company.bin.ImgList"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.company.bin.ProductList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>    
-<%
-ProductList p = (ProductList)request.getAttribute("p"); 
-ArrayList<ImgList> iList = (ArrayList<ImgList>)request.getAttribute("iList");
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,20 +21,20 @@ width: 20%;
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script type="text/javascript" src="http://localhost:8081/ShoppingMall/js/mainJs.js"></script>
 </head>
-<body onload="selcetVal('<%=p.getP_categori()%>','<%=p.getP_gender()%>','<%=p.getP_color()%>')">
+<body onload="selcetVal('${p.p_categori }','${p.p_gender }','${p.p_color }')">
 	<form enctype="multipart/form-data" name="formWithFiles" id="formWithFiles" action="UpdateProduct" method="post" style="margin-top: 20px">
 		<h1 align="center" style="margin-bottom: 20px">상품 수정</h1>
 		<table class="table">
 			<tr >
 				<td class="firT" style="border: none;">상품 이름 : </td>
 				<td style="border: none;">
-					<input type="text" name="p_name" class="form-control" value="<%=p.getP_name()%>">
-					<input type="hidden" name="p_id" value="<%=p.getP_id()%>"> 
+					<input type="text" name="p_name" class="form-control" value="${p.p_name }">
+					<input type="hidden" name="p_id" value="${p.p_id }"> 
 				</td>
 			</tr>
 			<tr>
 				<td class="firT" style="border: none;">상품 가격 : </td>
-				<td style="border: none;"><input type="text" name="p_price" class="form-control" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" value="<%=p.getP_price()%>"></td>
+				<td style="border: none;"><input type="text" name="p_price" class="form-control" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" value="${p.p_price }"></td>
 			</tr>
 			<tr>
 				<td class="firT" style="border: none;">카테고리 : </td>
@@ -82,19 +75,19 @@ width: 20%;
 			</tr>
 			<tr>
 				<td style="border: none;">상세 분류 : </td>
-				<td style="border: none;"><input type="text" name="p_desc" class="form-control" value="<%=p.getP_desc()%>"></td>
+				<td style="border: none;"><input type="text" name="p_desc" class="form-control" value="${p.p_desc }"></td>
 			</tr>
 			<tr>
 				<td class="firT" style="border: none;">제품 설명 : </td>
 				<td style="border: none;">
-					<textarea class="form-control" name="p_info"><%=p.getP_info()%></textarea>
+					<textarea class="form-control" name="p_info">${p.p_info }</textarea>
 				</td>
 			</tr>
 			<tr>
 				<td class="firT" style="border: none;"> 메인 사진 : </td>
 				<td style="border: none;">
 					<div class="col-md-3 mt-1" style="width: 100%;">
-						<img class="img-fluid img-responsive rounded product-image" src="<%=p.getP_url()%>" id="mainImg" onerror="this.parentNode.style.display='none'" >
+						<img class="img-fluid img-responsive rounded product-image" src="${p.p_url }" id="mainImg" onerror="this.parentNode.style.display='none'" >
 					</div>
 				</td>
 			</tr>
@@ -108,29 +101,27 @@ width: 20%;
 		<tr>
 			<td class="firT" style="border: none;">상세 사진 : </td>
 			<td style="border: none;">
-				<input type="button" value="사진 추가" onclick="addImg(<%=4-iList.size() %>)" class="btn btn-primary">
+				<input type="button" value="사진 추가" onclick="addImg(${4-iList.size()})" class="btn btn-primary">
 				<input type="button" value="사진 제거" onclick="minusImg()" class="btn btn-primary">
-				<%for(int i = 0; i<4-iList.size();i++){ %>
-					<form enctype="multipart/form-data" name="formWithFiles" id="formWithFiles<%=i%>" style="display: none;">
+				<c:forEach begin="0" end="${4-iList.size() }" step="1" var="i">
+					<form enctype="multipart/form-data" name="formWithFiles" id="formWithFiles${i }" style="display: none;">
 						<input type="file"  name="filename1" class="form-control">
 					</form>
-				<%} %>
+				</c:forEach>
 			</td>
 		</tr>
-	<%for(int i = 0; i<iList.size(); i++){ 
-				ImgList img = iList.get(i);
-			%>
+		<c:forEach items="${iList }" var="img" varStatus="i">
 			<tr>
-			<td style="border: none;"><input type="button" value="X" onclick="deleImg(<%=img.getId() %>)" class="form-control"></td>
-			<td style="border: none;">
-				<div class="col-md-3 mt-1" style="width: 100%;">
-					<img class="img-fluid img-responsive rounded product-image" src="<%=img.getUrl()%>" onerror="this.parentNode.style.display='none'">
-				</div>
-			</td>
+				<td style="border: none;"><input type="button" value="X" onclick="deleImg(${img.id})" class="form-control"></td>
+				<td style="border: none;">
+					<div class="col-md-3 mt-1" style="width: 100%;">
+						<img class="img-fluid img-responsive rounded product-image" src="${img.url }" onerror="this.parentNode.style.display='none'">
+					</div>
+				</td>
 			</tr>
-			<%} %>
+		</c:forEach>
 		<tr>
-			<td colspan="2" style="border: none;" align="center"><input type="button" value="수정 완료" onclick="updateProduct($('#quan').val(),<%=p.getP_id() %>)" class="btn btn-primary"></td>
+			<td colspan="2" style="border: none;" align="center"><input type="button" value="수정 완료" onclick="updateProduct($('#quan').val(),${p.p_id})" class="btn btn-primary"></td>
 		</tr>
 	</table>
 	<input type="hidden" id="quan" value="0">

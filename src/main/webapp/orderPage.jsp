@@ -1,12 +1,8 @@
 <%@page import="oracle.net.aso.p"%>
-<%@page import="com.company.bin.BasketList"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>
-<%
-ArrayList<BasketList> basketList = (ArrayList<BasketList>) session.getAttribute("basketList");
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>		
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,57 +21,54 @@ ArrayList<BasketList> basketList = (ArrayList<BasketList>) session.getAttribute(
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 </head>
 <body>
+	<c:set var="total" value="0"/>
 	<header class="header"><jsp:include page="header.jsp" /></header>
 	<section style="height: auto; min-height: 1000px;">
 	<div class="container">
-		<div class="container mt-5 mb-5"
-			style=" padding-top: 100px; ">
-			<%
-			if (basketList != null) {
-				int total = 0;
-				String o_name = "";
-				for (int i = 0; i < basketList.size(); i++) {
-					BasketList bas = basketList.get(i);
-					total += bas.getPrice()*bas.getQuantity();
-					o_name += bas.getName()+"("+bas.getSize()+") "+bas.getQuantity()+"개 ";
-			%>
-			<div class="d-flex justify-content-center row">
-				<div class="row p-2 bg-white border rounded">
-					<div class="col-md-3 mt-1" style="width: 20%;">
-						<img class="img-fluid img-responsive rounded product-image"
-							src="<%=bas.getUrl()%>">
+		<div class="container mt-5 mb-5" style=" padding-top: 100px;">
+			<c:forEach items="${basketList }" var="bas" varStatus="i">
+				<div class="d-flex justify-content-center row">
+					<div class="row p-2 bg-white border rounded">
+						<div class="col-md-3 mt-1" style="width: 20%;">
+							<img class="img-fluid img-responsive rounded product-image"
+								src="${bas.url }">
+						</div>
+						<div class="col-md-6 mt-1" style="width: 80%; float: left;">
+							<table class="table">
+								<tr>
+									<td style="width: 25%">${bas.name }</td>
+									<td style="width: 25%">${bas.size }</td>
+									<td style="width: 25%">${bas.quantity }</td>
+									<td style="width: 25%">
+										<c:set var="num" value="${bas.getPrice()*bas.getQuantity()}"/>
+										<c:set var="total" value="${total+num }"/>
+										<fmt:setLocale value="ko_kr"/>
+										<fmt:formatNumber value="${num }" groupingUsed="true" type="currency"/>
+									</td>
+								</tr>
+							</table>
+						</div>
 					</div>
-					<div class="col-md-6 mt-1" style="width: 80%; float: left;">
-						<table class="table">
-							<tr>
-								<td style="width: 25%"><%=bas.getName()%></td>
-								<td style="width: 25%"><%=bas.getSize()%></td>
-								<td style="width: 25%"><%=bas.getQuantity()%></td>
-								<td style="width: 25%">&#8361;<%=bas.getPrice()*bas.getQuantity()%></td>
-							</tr>
-						</table>
+					<div style="disply: none;">
+						<form action="NewOrder" id="NewOrder${i.count-1 }" method="post">
+							<input type="hidden" value="${id }" id="id${i.count-1 }">
+							<input type="hidden" value="${bas.p_id }"  id="p_id${i.count-1 }">
+							<input type="hidden" value="${name }"  id="name${i.count-1 }">
+							<input type="hidden" value="${bas.name }" id="o_name${i.count-1 }">
+							<input type="hidden" value="${phone }"  id="phone${i.count-1 }">
+							<input type="hidden" value="${nAd }"  id="nAd${i.count-1 }">
+							<input type="hidden" value="${address }"  id="address${i.count-1 }">
+							<input type="hidden" value="${dAd }" id="dAd${i.count-1 }">
+							<input type="hidden" value="${num }" id="price${i.count-1 }">
+						</form>
 					</div>
 				</div>
-				<div style="disply: none;">
-					<form action="NewOrder" id="NewOrder<%=i %>" method="post">
-						<input type="hidden" value="${id }" id="id<%=i%>">
-						<input type="hidden" value="<%=bas.getP_id() %>"  id="p_id<%=i%>">
-						<input type="hidden" value="${name }"  id="name<%=i%>">
-						<input type="hidden" value="<%=bas.getName() %>" id="o_name<%=i%>">
-						<input type="hidden" value="${phone }"  id="phone<%=i%>">
-						<input type="hidden" value="${nAd }"  id="nAd<%=i%>">
-						<input type="hidden" value="${address }"  id="address<%=i%>">
-						<input type="hidden" value="${dAd }" id="dAd<%=i%>">
-						<input type="hidden" value="<%=bas.getPrice()*bas.getQuantity() %>" id="price<%=i%>">
-					</form>
-				</div>
-			</div>
-			<%
-			}
-			%>
+			</c:forEach>
 			<input type="hidden"  name="payment" id="payment">
 			<h5 align="right">
-				총합: &#8361;<%=total%></h5>
+				<fmt:setLocale value="ko_kr"/>
+				<fmt:formatNumber value="${total }" groupingUsed="true" type="currency"/>
+			</h5>
 
 		</div>
 		<div style="padding-top: 50px;">
@@ -140,20 +133,20 @@ ArrayList<BasketList> basketList = (ArrayList<BasketList>) session.getAttribute(
 					<div class="shoping__checkout" align="left">
 						<h5>가격 총합</h5>
 						<ul>
-							<li>가격 <span id="total">&#8361;<%=total%></span></li>
+							<li>가격 <span id="total">
+								<fmt:setLocale value="ko_kr"/>
+								<fmt:formatNumber value="${total }" groupingUsed="true" type="currency"/>
+							</span></li>
 						</ul>
 					</div>
 				</div>
 				<div class="shoping__discount">
 					<form action="">
-						<a class="site-btn" style="margin: 10px; margin-top: 30px" onclick=" NewOrder(<%=basketList.size()%>);return false;">결제하기</a>
+						<a class="site-btn" style="margin: 10px; margin-top: 30px" onclick=" NewOrder(${basketList.size()});return false;">결제하기</a>
 					</form>
 				</div>
 			</div>
 		</div>
-		<%
-		}
-		%>
 	</section>
 	<footer><jsp:include page="footer.jsp" /></footer>
 	

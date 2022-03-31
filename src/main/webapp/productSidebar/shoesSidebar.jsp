@@ -11,22 +11,27 @@
 <body>
 	<div style="padding: 10px">
 		<h5>색상</h5>
-		<select class="form-select form-select-sm" aria-label=".form-select-sm example" >
+		<div class="_desc">
+		<select class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="descSearch();return false;">
 			<option selected>선택하세요</option>
 			<option value="black">black</option>
 			<option value="red">red</option>
 			<option value="blue">blue</option>
 			<option value="emerald">emerald</option>
+			<option value="brown">brown</option>
 			<option value="white	">white</option>
 		</select>
+		</div>
 	</div>
 	<div style="padding: 10px">
 		<h5>세부 분류</h5>
-		<select class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="descSearch();return false;" id="_desc">
+		<select class="form-select form-select-sm" aria-label=".form-select-sm example" >
 			<option selected>선택하세요</option>
-			<option value="1">티셔츠</option>
-			<option value="2">후드티</option>
-			<option value="3">롱슬리브</option>
+			<option value="top">상의</option>
+			<option value="bottom">하의</option>
+			<option value="outer">아우터</option>
+			<option value="shoes">신발</option>
+			<option value="etc.">ETC.</option>
 		</select>
 	</div>
 </body>

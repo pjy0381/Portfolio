@@ -129,8 +129,8 @@ footer{
 .paging {
 	margin-bottom: 100px;
 	text-align: center;
-	width: 80%;
-	float: right;
+	width: 90%;
+	float: left;
 }
 .paging a{
 	text-decoration: none;

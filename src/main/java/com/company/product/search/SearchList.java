@@ -25,8 +25,14 @@ public class SearchList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String keyword = request.getParameter("keyword");
+		String categori = "%%";
+		if(request.getParameter("categori") != null) { categori = request.getParameter("categori");}
 		int page = 1;
 		if(request.getParameter("page") !=null) {page = Integer.parseInt(request.getParameter("page"));}
+		String p_desc = "%%";
+		if(request.getParameter("p_desc") != null) { p_desc = request.getParameter("p_desc");}
+		String p_color = "%%";
+		if(request.getParameter("p_color") != null) { p_color = request.getParameter("p_color");}
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -34,14 +40,18 @@ public class SearchList extends HttpServlet {
 		
 		try {
 			conn = JDBCCon.getConnection();
-			String sql =  "select * from (select rownum as rnum,B.* from (select * from tbl_product where p_name like ? order by p_id desc) B) where rnum between ? and ?";
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, "%"+keyword+"%");
-				stmt.setInt(2, page * 12 - 11);
-				stmt.setInt(3, page * 12);
+			
+			String sql = "select * from (select rownum as rnum,B.* from (select * from tbl_product where p_name like ? and p_desc like ? and p_color like ? and p_categori like ? order by p_id desc) B) where rnum between ? and ?" ;
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, "%"+keyword+"%");
+			stmt.setString(2, p_desc);
+			stmt.setString(3, p_color);
+			stmt.setString(4, categori);
+			stmt.setInt(5, page * 12 - 11);
+			stmt.setInt(6, page * 12);
 
 			rs = stmt.executeQuery();
-
+			
 			ArrayList<ProductList> pList = new ArrayList<ProductList>();
 			while (rs.next()) {
 				ProductList p = new ProductList();
@@ -57,14 +67,19 @@ public class SearchList extends HttpServlet {
 				p.setSale(rs.getInt("sale"));
 				pList.add(p);
 			}
+			
+			 // 전체 게시글 수 담는 변수
 			stmt.close();
 			rs.close();
 			
-			sql = "select count(p_id) from tbl_product where p_name like ?";
+			sql = "select count(p_id) from tbl_product where p_name like ? and p_desc like ? and p_color like ? and p_categori like ?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, "%"+keyword+"%");
+			stmt.setString(2, p_desc);
+			stmt.setString(3, p_color);
+			stmt.setString(4, categori);
 			rs = stmt.executeQuery();
-
+			
 			int totalCount = 0; // 전체 게시글 수 담는 변수
 			if (rs.next()) {
 				totalCount = rs.getInt(1);

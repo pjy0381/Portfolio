@@ -1,9 +1,7 @@
-<%@page import="com.company.bin.ProductList"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>
-<%ArrayList<ProductList> pList = (ArrayList<ProductList>) request.getAttribute("pList");%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>	
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -25,33 +23,28 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="css/styles.css" rel="stylesheet" />
 </head>
-<body>
+<body >
 	<!-- Section-->
-	<section class="py-5">
-		<div class="container px-4 px-lg-5 mt-5">
-			<div
-				class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-				<%
-				ArrayList<Integer> basket = new ArrayList<Integer>();
-				if (pList != null) {
-					for (int i = 0; i < pList.size(); i++) {
-						ProductList p = pList.get(i);
-					 %>
+	<section class="py-5" style="float: left;height: auto;">
+		<h4>${totalCount }개 검색되었습니다.</h4>
+		<div class="container px-4 px-lg-5 mt-5" style="float: left; height: auto;">
+			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+				<c:forEach items="${pList }" var="p" varStatus="i">
 				<div class="col mb-5">
 					<div class="card h-100">
 						<!-- Product image-->
-						<a href="ShopDetails?id=<%=p.getP_id()%>">
+						<a href="ShopDetails?id=${p.p_id}">
 						<img class="card-img-top"
-							src="<%=p.getP_url() %>" alt="..." />
+							src="${p.p_url }" alt="..." />
 						</a>	
 						<!-- Product details-->
 						<div class="card-body p-4">
 							<div class="text-center">
 								<!-- Product name-->
-								<h5 class="fw-bolder">no.<%=p.getP_id() %></h5>
+								<h5 class="fw-bolder">no.${p.p_id}</h5>
 								<h5 class="fw-bolder">
-								<%=p.getP_name() %>
-								<span id="<%=p.getP_id()%>"><script type="text/javascript">totalR(<%=p.getP_id()%>)</script></span>
+								${p.p_name}
+								<span id="${p.p_id}"><script type="text/javascript">totalR(${p.p_id})</script></span>
 								</h5>
 								<!-- Product reviews-->
 								<div class="d-flex justify-content-center small text-warning mb-2">
@@ -59,29 +52,31 @@
 								</div>
 								
 								<!-- Product price-->
-								<%if(p.getEvent().equals("yes")){ 
-									int price = p.getP_price()*(100-p.getSale())/100;
-								%>
-								 <span class="text-muted text-decoration-line-through"><%=p.getP_price()%></span>
-								 &#8361;<%=price%>
-								<%}else{ %>
-								&#8361;<%=p.getP_price() %>
-								<%} %>
+								<c:choose>
+								<c:when test="${p.event=='yes' }">
+									<span class="text-muted text-decoration-line-through">${p.p_price }</span>
+									<c:set var="num" value="${(p.p_price*(100-p.sale))/100 }"/>
+									<fmt:setLocale value="ko_kr"/>
+									<fmt:formatNumber value="${num }" groupingUsed="true" type="currency"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="num" value="${p.p_price }"/>
+									<fmt:setLocale value="ko_kr"/>
+									<fmt:formatNumber value="${num }" groupingUsed="true" type="currency"/>
+								</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
-						<!-- Product actions-->
+									<!-- Product actions-->
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
 								<input type="hidden" id="_quantity" value="1" >
-								<button class="btn2 btn-outline-dark mt-auto" onclick="addBasket(<%=p.getP_id()%>)">Add to cart</button>
+								<button class="btn2 btn-outline-dark mt-auto" onclick="addBasket(${p.p_id})">Add to cart</button>
 							</div>
 						</div>
 					</div>
 				</div>
-				<%
-				}
-				}
-				%>
+				</c:forEach>
 			</div>
 		</div>
 	</section>

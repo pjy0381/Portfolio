@@ -33,7 +33,7 @@
 					<fmt:setLocale value="ko_kr"/>
 					<fmt:formatNumber value="${num }" groupingUsed="true" type="currency"/>
 				</td>
-				<td id="state${i.count }">${order.state }</td>
+				<td id="state${i.count-1 }">${order.state }</td>
 				<td>${order.name }</td>
 				<td>
 					<c:if test="${order.state == '배송 완료'}">

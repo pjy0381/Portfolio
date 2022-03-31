@@ -1,13 +1,6 @@
-<%@page import="com.company.bin.ProductList"%>
-<%@page import="com.company.bin.ReviewsList"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>
-<%
-ArrayList<ReviewsList> rList = (ArrayList<ReviewsList>) request.getAttribute("rList");
-ProductList p = (ProductList) request.getAttribute("p");
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,44 +15,37 @@ ProductList p = (ProductList) request.getAttribute("p");
 <body>
 	<div class="container mt-5 mb-5">
 		<div class="d-flex justify-content-center row">
-			<%
-			for (int i = 0; i < rList.size(); i++) {
-				ReviewsList r = rList.get(i);
-			%>
+		<c:forEach items="${rList }" var="r" varStatus="i">
 			<div class="col-md-10">
 				<div class="row p-2 bg-white border rounded">
 					<div class="col-md-3 mt-1">
 						<img class="img-fluid img-responsive rounded product-image"
-							src="<%=r.getR_url()%>">
+							src="${r.r_url }">
 					</div>
 					<div class="d-flex justify-content-center small text-warning mb-2">
-						<%for (int k = 1; k <= r.getR_grade(); k++) {%>
-						<span class="bi-star-fill"></span>
-						<%} if ( r.getR_grade() % 1 != 0) {%>
-						<span class="bi bi-star-half"></span>
-						<%} else if(r.getR_grade()!=5){%>
-						<span class="bi bi-star"></span>
-						<%}for (int k = 1; k < 5 - r.getR_grade(); k++) {%>
-						<span class="bi bi-star"></span>
-						<%}%>
-						<span><%=r.getR_grade() %></span>
+						<c:forEach begin="1" end="${r.r_grade }" step="1" var="k">
+							<span class="bi-star-fill"></span>
+						</c:forEach>
+						<c:if test="${r.r_grade % 1 != 0 }"><span class="bi bi-star-half"></span></c:if>
+						<c:forEach begin="1" end="${5 - Math.ceil(r.r_grade) }" step="1" var="k">
+							<span class="bi bi-star"></span>
+						</c:forEach>
+						<span>${r.r_grade }</span>
 					</div>
 					<div class="col-md-6 mt-1" style="width: 75%">
-						<h5><%=p.getP_name()%></h5>
+						<h5>${p.p_name }</h5>
 						<div class="review_rating"></div>
 						<div class="mt-1 mb-1 spec-1">
-							<span><%=r.getWriter()%>/</span> <span><%=r.getCrdate()%></span>
+							<span>${r.writer }/</span> <span>${r.crdate }</span>
 						</div>
-						<p class="text-justify text-truncate para mb-0"><%=r.getR_content()%>
+						<p class="text-justify text-truncate para mb-0">${r.r_content }
 							<br> <br>
 						</p>
 
 					</div>
 				</div>
 			</div>
-			<%
-			}
-			%>
+		</c:forEach>
 		</div>
 	</div>
 

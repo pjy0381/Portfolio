@@ -30,7 +30,7 @@
 				<td>${order.o_id }</td>
 				<td><a href="ShopDetails?id=${order.p_id }">${order.o_name }</a></td>
 				<td>${order.name }</td>
-				<td id="state${i.count }">${order.state }</td>
+				<td id="state${i.count-1 }">${order.state }</td>
 				<td>${order.pdate }</td>
 				<td>
 					<c:choose>

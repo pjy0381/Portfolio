@@ -211,12 +211,14 @@ function modifyA() {
 function descSearch() {
 	var _color=$("#_color").val();
 	var url = location.href;
-	if(url.split('?').length==1){
-		url+="?p_color="
+	if(url.split('p_color=').length>1){
+		url= url.split('p_color=')[0]+"p_color="+_color;
+		if(url.split('p_color=')[1].split("&").length>1){url += "&"+url.split('p_color=')[1].split("&")[1];}
+	}else if(url.split('?').length==1){
+		url+="?p_color="+_color
 	}else{
-		url+='&p_color=';
+		url+='&p_color='+_color;
 	}
-	url+=_color;
 	location.href = url;
 }
 
@@ -704,4 +706,55 @@ function counsel(){
 	}else{
 		$("#counselAdd").submit();
 	}
+}
+
+function GoPage(i,k){
+	var url = location.href;
+	var page = "";
+	for(var j = 0; j<url.split('page='+i).length; j++){
+		page += url.split('page='+i)[j];
+	}
+	if(url.split('?').length==1){location.href = page+'?page='+k;}
+	else if(url.split('&page').length>1){location.href = page+'page='+k;}
+	else if(url.split('p_color').length>1){location.href = page+'&page='+k;}
+	else if(url.split('page').length>1){location.href = page+'page='+k;}
+	else{location.href = page+'&page='+k;}
+}
+
+function sidebarSelect(color,categori){
+	$("#_color").val(color).prop("selected",true);
+	$("#_categori").val(categori).prop("selected",true);
+}
+
+function MainDesc() {
+	var _categori=$("#_categori").val();
+	var url = location.href;
+	if(url.split('categori=').length>1){
+		url= url.split('categori=')[0]+"categori="+_categori;
+		if(url.split('categori=')[1].split("&").length>1){url += "&"+url.split('categorir=')[1].split("&")[1];}
+	}else if(url.split('?').length==1){
+		url+="?categori="+_categori
+	}else{
+		url+='&categori='+_categori;
+	}
+	location.href = url;
+}
+
+function SideDesc() {
+	var _desc=$("#_desc").val();
+	var url = location.href;
+	if(url.split('p_desc=').length>1){
+		url= url.split('p_desc=')[0]+"p_desc="+_desc;
+		if(url.split('p_desc=')[1].split("&").length>1){url += "&"+url.split('p_desc=')[1].split("&")[1];}
+	}else if(url.split('?').length==1){
+		url+="?p_desc="+_desc
+	}else{
+		url+='&p_desc='+_desc;
+	}
+	location.href = url;
+}
+
+function sidebarDescSelect(color,desc){
+	$("#_color").val(color).prop("selected",true);
+	$("#_desc").val(desc).prop("selected",true);
 }

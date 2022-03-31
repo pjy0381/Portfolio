@@ -1,20 +1,7 @@
-<%@page import="com.company.bin.ImgList"%>
-<%@page import="com.company.bin.ReviewsList"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.company.bin.ProductList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>
-<%
-double avgG = (double) request.getAttribute("avgG");
-ProductList p = (ProductList) request.getAttribute("p");
-ArrayList<ReviewsList> rList = (ArrayList<ReviewsList>) request.getAttribute("rList");
-ArrayList<ImgList> iList = (ArrayList<ImgList>) request.getAttribute("iList");
-int price = p.getP_price() * (100 - p.getSale()) / 100;
-double number = Math.round((avgG * 100));
-String id = (String)session.getAttribute("id");
-int p_id = Integer.parseInt(request.getParameter("id")) ;
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +10,7 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title><%=p.getP_name()%></title>
+<title>${p.p_name }</title>
 
 
 <!-- Css Styles -->
@@ -45,7 +32,7 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-<body onload="pickView('<%=id%>',<%=p_id%>)">
+<body onload="pickView('${sessionScope.id }',${p.p_id })">
 
 	<header class="header"><jsp:include page="header.jsp" />
 	</header>
@@ -59,63 +46,39 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 					<div class="product__details__pic">
 						<div class="product__details__pic__item">
 							<img class="product__details__pic__item--large"
-								src="<%=p.getP_url()%>" alt="">
+								src="${p.p_url }" alt="">
 						</div>
 						<div class="product__details__pic__slider owl-carousel">
-						<%
-						if(iList!=null){
-							for(int i =0; i<iList.size();i++){ 
-								ImgList img = iList.get(i);
-						%>
-							<img data-imgbigurl="<%=img.getUrl()%>" src="<%=img.getUrl()%>" alt=""> 
-						<%}} %>
+						<c:forEach items="${iList }" var="img" >
+							<img data-imgbigurl="${img.url }" src="${img.url }" alt=""> 
+						</c:forEach>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="product__details__text">
 						<div class="text-center">
-							<h3><%=p.getP_name()%></h3>
-							<div
-								class="d-flex justify-content-center small text-warning mb-2"
-								onloadstart="totalR(<%=p.getP_id()%>);">
-								<%
-								for (int k = 1; k <= avgG; k++) {
-								%>
-								<span class="bi-star-fill"></span>
-								<%
-								}
-								if (avgG % 1 != 0) {
-								%>
-								<span class="bi bi-star-half"></span>
-								<%
-								} else  if(avgG!=5){
-								%>
-								<span class="bi bi-star"></span>
-								<%}
-								for (int k = 0 ; k <(5 - Math.ceil(avgG)) ; k++) {
-								%>
-								<span class="bi bi-star"></span>
-								<%
-									}
-								%>
-								<span><%=number / 100%></span> <span>(<%=rList.size()%>
-									reviews)
-								</span>
+							<h3>${p.p_name }</h3>
+							<div class="d-flex justify-content-center small text-warning mb-2" onloadstart="totalR(${p.p_id });">
+								<c:forEach begin="1" end="${avgG }" step="1" var="k">
+									<span class="bi-star-fill"></span>
+								</c:forEach>
+								<c:if test="${avgG % 1 != 0 }"><span class="bi bi-star-half"></span></c:if>
+								<c:forEach begin="1" end="${5 - Math.ceil(avgG) }" step="1" var="k">
+									<span class="bi bi-star"></span>
+								</c:forEach>
+								<span>${Math.round((avgG * 100))/100 }</span> <span>(${rList.size() }reviews)</span>
 							</div>
 						</div>
 						<div class="product__details__price">
-							<%
-							if (p.getEvent().equals("yes")) {
-							%>&#8361;<%=price%>
-							<%
-							} else {
-							%>&#8361;<%=p.getP_price()%>
-							<%
-							}
-							%>
+							<c:set var="num" value="${p.p_price }"/>
+							<c:if test="${p.event == 'yes' }">
+								<c:set var="num" value="${p.p_price  * (100 - p.sale) / 100}"/>
+							</c:if>
+							<fmt:setLocale value="ko_kr"/>
+							<fmt:formatNumber value="${num }" groupingUsed="true" type="currency"/>
 						</div>
-						<p><%=p.getP_info() %></p>
+						<p>${p.p_info }</p>
 						<select class="primary-btn" id="_size"> 
 								<option selected>사이즈 선택</option> 
 								<option value="S">S</option> 
@@ -131,8 +94,8 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 								</div>
 							</div>
 						</div>
-						<a  class="primary-btn" onclick="addBasket(<%=p.getP_id()%>)">ADD TO CARD</a> <a href="#"
-							class="heart-icon" onclick="pick('<%=id%>',<%=p_id%>,'<%=p.getP_name()%>')"><span class="bi bi-heart-fill" id="heart"></span></a>
+						<a  class="primary-btn" onclick="addBasket(${p.p_id })">ADD TO CARD</a> <a href="#"
+							class="heart-icon" onclick="pick('${sessionScope.id }',${p.p_id },'${p.p_name }')"><span class="bi bi-heart-fill" id="heart"></span></a>
 					</div>
 				</div>
 				
@@ -143,20 +106,16 @@ int p_id = Integer.parseInt(request.getParameter("id")) ;
 								data-toggle="tab" href="#tabs-1" role="tab" aria-selected="true">상세 설명</a>
 							</li>
 							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-3" role="tab" aria-selected="false">리뷰 <span>(<%=rList.size()%>)
+								href="#tabs-3" role="tab" aria-selected="false">리뷰 <span>(${rList.size() })
 								</span></a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tabs-1" role="tabpanel">
 								<div class="product__details__tab__desc">
 									<p>
-									<%
-									if(iList!=null){
-										for(int i =0; i<iList.size();i++){ 
-											ImgList img = iList.get(i);
-									%>
-										<img src="<%=img.getUrl()%>" alt=""> 
-									<%}} %>
+									<c:forEach items="${iList }" var="img" >
+										<img src="${img.url }" alt=""> 
+									</c:forEach>
 									</p>
 								</div>
 							</div>

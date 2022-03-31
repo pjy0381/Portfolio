@@ -1,11 +1,6 @@
-<%@page import="com.company.bin.OrderList"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>    
-<%
-ArrayList<OrderList> oList = (ArrayList<OrderList>) request.getAttribute("oList");
-%>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,25 +27,16 @@ ArrayList<OrderList> oList = (ArrayList<OrderList>) request.getAttribute("oList"
 						</tr>
 					</thead>
 					<tbody>
-						<%
-						if (oList != null) {
-							for (int i = 0; i < oList.size(); i++) {
-								OrderList order = oList.get(i);
-								if(order.getState().equals("주문 요청")){
-						%>
+					<c:forEach items="${oList }" var="order" varStatus="i">
 						<tr>
-							<td><%=order.getO_id()%></td>
-							<td><a href="ShopDetails?id=<%=order.getP_id()%>" style="text-decoration: none; color: black;"><%=order.getO_name()%></a></td>
-							<td><%=order.getName() %></td>
-							<td><%=order.getPrice() %></td>
-							<td><%=order.getPdate() %></td>
-							<td align="center"><button class="btn btn-primary" onclick="selectO_id(<%=order.getO_id() %>); return false;" >선택</button></td>
+							<td>${order.o_id }</td>
+							<td><a href="ShopDetails?id=${order.p_id }" style="text-decoration: none; color: black;">${order.o_name }</a></td>
+							<td>${order.name }</td>
+							<td>${order.price }</td>
+							<td>${order.pdate }</td>
+							<td align="center"><button class="btn btn-primary" onclick="selectO_id(${order.o_id }); return false;" >선택</button></td>
 						</tr>
-						<%
-								}
-						}
-						}
-						%>
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>

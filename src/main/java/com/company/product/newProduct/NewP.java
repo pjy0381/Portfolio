@@ -23,7 +23,12 @@ public class NewP extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String categori = request.getParameter("categori");
+		String categori = "%%";
+		if(request.getParameter("categori") != null) { categori = request.getParameter("categori");}
+		String p_desc = "%%";
+		if(request.getParameter("p_desc") != null) { p_desc = request.getParameter("p_desc");}
+		String p_color = "%%";
+		if(request.getParameter("p_color") != null) { p_color = request.getParameter("p_color");}
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -31,14 +36,11 @@ public class NewP extends HttpServlet {
 		
 		try {
 			conn = JDBCCon.getConnection();
-			String sql =  "select * from (select * from TBL_PRODUCT order by p_id desc) where ROWNUM <=12 order by p_id desc";
-			if(categori != null) {
-				sql = "select * from (select * from TBL_PRODUCT where p_categori = ? order by p_id desc) where ROWNUM <=12 order by p_id desc" ;
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, categori);
-			}else {
-				stmt = conn.prepareStatement(sql);
-			}
+			String sql =  "select * from (select * from TBL_PRODUCT where p_categori like ? and p_desc like ? and p_color like ? order by p_id desc) where ROWNUM <=12 order by p_id desc";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, categori);
+			stmt.setString(2, p_desc);
+			stmt.setString(3, p_color);
 
 			rs = stmt.executeQuery();
 
@@ -57,7 +59,6 @@ public class NewP extends HttpServlet {
 				p.setSale(rs.getInt("sale"));
 				pList.add(p);
 			}
-
 			request.setAttribute("pList", pList);
 			request.setAttribute("categori", categori);
 			RequestDispatcher view = request.getRequestDispatcher("newProductPage.jsp");

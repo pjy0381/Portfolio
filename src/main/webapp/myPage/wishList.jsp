@@ -21,7 +21,7 @@
 		<tbody>
 		<c:forEach items="${wList }" var="wish" varStatus="i">
 			<tr>
-				<td>${i.count+1 }</td>
+				<td>${i.count }</td>
 				<td><a href="ShopDetails?id=${wish.p_id }">${wish.p_name }</a></td>
 				<td>${wish.ip }</td>
 				<td>${wish.p_id }</td>

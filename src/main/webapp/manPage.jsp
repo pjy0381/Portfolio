@@ -2,10 +2,9 @@
     pageEncoding="UTF-8"%>
 <%
 String categori = (String)request.getAttribute("categori"); 
-String url = "man/mainSidebar.jsp";
-String gender = "ManP";
+String url = "productSidebar/mainSidebar.jsp";
 if(categori!=null){
-	url = "man/"+categori+"Sidebar.jsp";
+	url = "productSidebar/"+categori+"Sidebar.jsp";
 }
 int totalCount = 1;
 if (request.getAttribute("totalCount") != null) {
@@ -34,15 +33,16 @@ if (request.getParameter("page") != null) {
 <div class="main">
 	<header class="header"><jsp:include page="header.jsp"/></header>
 	<section class="sideProduct" > <jsp:include page="<%=url %>"/> </section>
-	<section style="height: auto; float: left; width: 80%" id="se"><jsp:include page="man/manPage.jsp"/>
-	</section>
-	<div class="paging">
+	<section style="height: auto; float: left; width: 80%; " id="se">
+		<main class="card-body" style="height: auto; float: left;"><jsp:include page="productPage/manPage.jsp"/></main>
+		<div class="paging">
 		<jsp:include page="page/getPage.jsp">
 			<jsp:param value="<%=totalCount%>" name="totalCount" />
 			<jsp:param value="<%=pg%>" name="pg" />
-			<jsp:param value="<%=gender%>" name="gender" />
 		</jsp:include>
 	</div>
+	</section>
+
 	<footer><jsp:include page="footer.jsp"/></footer>
 	
 </div>

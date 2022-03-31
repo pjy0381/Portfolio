@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-String categori = (String)request.getAttribute("categori"); 
-String url = "newP/mainSidebar.jsp";
-if(categori!=null){
-	url = "newP/"+categori+"Sidebar.jsp";
-}
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +12,14 @@ if(categori!=null){
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <body>
 <div class="main">
+	<c:if test="${categori== null} ">
+		<c:set var="categori" value="main"/>
+	</c:if>
 	<header class="header"><jsp:include page="header.jsp"/></header>
-	<section class="sideProduct"> <jsp:include page="<%=url %>"/> </section>
-	<section style="height: auto; float: left; width: 80%"><jsp:include page="newP/newPage.jsp"/></section>
+	<section class="sideProduct"> <jsp:include page="productSidebar/${categori }Sidebar.jsp"/> </section>
+	<section style="height: auto; float: left; width: 80%; " id="se">
+		<main class="card-body" style="height: auto; float: left;"><jsp:include page="productPage/newPage.jsp"/></main>
+	</section>
 	<footer><jsp:include page="footer.jsp"/></footer>
 </div>
 </body>

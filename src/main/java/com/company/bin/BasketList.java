@@ -4,21 +4,24 @@ public class BasketList {
 	private String url;
 	private String name;
 	private int p_id;
+	private int price;
+	private String size;
+	private int quantity;
+	
+	
 	public int getP_id() {
 		return p_id;
 	}
 	public void setP_id(int p_id) {
 		this.p_id = p_id;
 	}
-	private int price;
-	private String size;
 	public String getSize() {
 		return size;
 	}
 	public void setSize(String size) {
 		this.size = size;
 	}
-	private int quantity;
+
 	public String getUrl() {
 		return url;
 	}

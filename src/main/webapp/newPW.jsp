@@ -1,22 +1,16 @@
-<%@page import="com.company.bin.MemberBin"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-request.setCharacterEncoding("utf-8");
-String name = (String) request.getAttribute("name");
-String id = (String) request.getAttribute("id");
-if(name==null||id==null){
-	response.sendRedirect("index.jsp");
-}
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    	<c:if test="${name == null || id == null }">
+    		<c:redirect url="index.jsp"/>
+    	</c:if>
+
 </head>
 <body>
 
@@ -25,11 +19,11 @@ if(name==null||id==null){
 		<form action="NewPW" method="post" name="newPW">
 			<table class="table">
 				<tr>
-					<td><input type="text" value="<%=id%>" name="id" readonly="readonly" class="form-control">
+					<td><input type="text" value="${id }" name="id" readonly="readonly" class="form-control">
 					</td>
 				</tr>
 				<tr>
-					<td><input type="text" value="<%=name%>" name="name" readonly="readonly" class="form-control">
+					<td><input type="text" value="${name }" name="name" readonly="readonly" class="form-control">
 					</td>
 				</tr>
 				<tr>

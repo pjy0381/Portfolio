@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-request.setCharacterEncoding("utf-8");
-String p_id = request.getParameter("p_id");
-String writer = (String) session.getAttribute("name");
-int o_id = Integer.parseInt(request.getParameter("o_id"));
-
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,8 +22,8 @@ int o_id = Integer.parseInt(request.getParameter("o_id"));
 	<form method="post" enctype="multipart/form-data" action="Upload"  name="myform" id="myform">
 		<table class="table">
 			<tr>
-				<td>상품번호:<input type="text" value="<%=p_id%>" class="form-control" readonly="readonly" name="p_id"> <input type="hidden" value="<%=o_id%>" name="o_id"> </td>
-				<td>작성자:<input type="text" value="<%=writer%>" class="form-control" readonly="readonly" name="writer"></td>
+				<td>상품번호:<input type="text" value="${param.p_id }" class="form-control" readonly="readonly" name="p_id"> <input type="hidden" value="${param.o_id }" name="o_id"> </td>
+				<td>작성자:<input type="text" value="${name }" class="form-control" readonly="readonly" name="writer"></td>
 			</tr>
 			<tr>
 				<td colspan="2">

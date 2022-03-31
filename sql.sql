@@ -31,9 +31,9 @@ alter table shopMem add adD varchar2(50);
 
 insert into shopMem (id,password,name,phone,address,nAd,dAd) values('zz','zz','zz','zz','zz','zz','zz')
 
-select * from shopMem
+select * from tbl_product
 
-update shopMem set grade = 'manager' where id = 'abcd' 
+update tbl_product set p_desc = 'clock' where p_desc = 'watch' 
 
 create table tbl_product(
 	p_id number(20),
@@ -187,7 +187,7 @@ insert into tbl_pick values('1','1','1','1')
 
 update tbl_pick set pick = 'no'
 
-update tbl_order set state = '배송 완료' where o_id = 1
+update tbl_order set state = '배송 완료' where o_id = 18
 
 insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values((select nvl(max(r_id),0)+1 from tbl_reivews),14,'고객','네번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',5.0)
 
@@ -271,3 +271,5 @@ select * from tbl_manager
 insert into tbl_manager values('abcd','1234')
 
 select * from tbl_product where p_gender in('man','public') and p_desc like '%%' order by p_id desc
+
+select count(p_id) from tbl_product where p_name like '%%' and p_desc like '%%' and p_color like '%%' 
