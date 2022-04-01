@@ -26,7 +26,7 @@ function daily(i) {
 	var result = "";
 	$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/DailySales', 
+			  url:'DailySales', 
 			  async:false,
 			  	data:{
 			  		day:daily2(i),

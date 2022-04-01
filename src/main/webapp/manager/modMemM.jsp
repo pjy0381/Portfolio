@@ -1,11 +1,6 @@
-<%@page import="com.company.bin.MemberBin"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>    
-<%
-ArrayList<MemberBin> mList = (ArrayList<MemberBin>) request.getAttribute("mList");
-%>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>        
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,27 +27,20 @@ ArrayList<MemberBin> mList = (ArrayList<MemberBin>) request.getAttribute("mList"
 						</tr>
 					</thead>
 					<tbody>
-						<%
-						if (mList != null) {
-							for (int i = 0; i < mList.size(); i++) {
-								MemberBin mem = mList.get(i);
-						%>
+					<c:forEach items="${mList }" var="mem" varStatus="i">
 						<tr>
-							<td><input type="hidden" value="<%=mem.getId()%>" class="form-control"><span><%=mem.getId()%></span></td>
-							<td><span><%=mem.getName()%></span></td>
-							<td><span><%=mem.getPassword()%></span></td>
-							<td><span><%=mem.getPhone()%></span></td>
+							<td><input type="hidden" value="${mem.id }" class="form-control"><span>${mem.id }</span></td>
+							<td><span>${mem.name }</span></td>
+							<td><span>${mem.password }</span></td>
+							<td><span>${mem.phone }</span></td>
 							<td>
-								<span>(<%=mem.getnAd() %>)<%=mem.getAddress() %> <%=mem.getdAd() %></span>
+								<span>(${mem.nAd })${mem.address } ${mem.dAd }</span>
 							</td>
-							<td><span><%=mem.getReg()%></span></td>
-							<td align="center"><button class="btn btn-primary" onclick="openPopupA('ShowMem?id=<%=mem.getId() %>'); return false;">수정</button></td>
-							<td align="center"><button class="btn btn-primary" onclick="deleMem('<%=mem.getId()%>'); return false;">삭제</button></td>
+							<td><span>${mem.reg }</span></td>
+							<td align="center"><button class="btn btn-primary" onclick="openPopupA('ShowMem?id=${mem.id}'); return false;">수정</button></td>
+							<td align="center"><button class="btn btn-primary" onclick="deleMem('${mem.id}'); return false;">삭제</button></td>
 						</tr>
-						<%
-						}
-						}
-						%>
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>

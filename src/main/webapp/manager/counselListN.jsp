@@ -1,12 +1,7 @@
-<%@page import="com.company.bin.CounselList"%>
-<%@page import="com.company.bin.ProductList"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="com.company.common.MainURL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>    
-<%
-ArrayList<CounselList> cList = (ArrayList<CounselList>) request.getAttribute("cList");
-%>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +11,7 @@ ArrayList<CounselList> cList = (ArrayList<CounselList>) request.getAttribute("cL
         <link href="css/ManagerStyles.css" rel="stylesheet" />
 </head>
 <body>
+	<c:set value="<%=MainURL.getM_url() %>" var="mainUrl"/>
 	<div class="card-body">
 		<table id="datatablesSimple">
 			<thead>
@@ -32,34 +28,27 @@ ArrayList<CounselList> cList = (ArrayList<CounselList>) request.getAttribute("cL
 				</tr>
 			</thead>
 			<tbody>
-			<%
-				if (cList != null) {
-					for (int i = 0; i < cList.size(); i++) {
-						CounselList coun = cList.get(i);
-						if(coun.getC_state().equals("답변 대기")){
-			%>
+			<c:forEach items="${cList }" var="coun" varStatus="i">
+			<c:if test="${coun.c_state == '답변 대기' }">
 				<tr>
 					<td>
 						<div class="col-md-3 mt-1" style="width: 100%;">
-							<a href="ShowCounsel?c_id=<%=coun.getC_id()%>" style="text-decoration: none; color: black;">
-								<img class="img-fluid img-responsive rounded product-image"src="<%=coun.getC_url()%>" onerror="this.parentNode.style.display='none'">
+							<a href="ShowCounsel?c_id=${coun.c_id }" style="text-decoration: none; color: black;">
+								<img class="img-fluid img-responsive rounded product-image"src="${mainUrl}${coun.c_url }" onerror="this.parentNode.style.display='none'">
 							</a>
 						</div>
 					</td>
-					<td><%=coun.getC_id()%></td>
-					<td><%=coun.getO_id() %></td>
-					<td><%=coun.getC_categori()%></td>
-					<td><%=coun.getId() %></td>
-					<td><a href="ShowCounsel?c_id=<%=coun.getC_id()%>" style="text-decoration: none; color: black;"><%=coun.getTitle()%></a></td>
-					<td><%=coun.getPhone()%></td>
-					<td><%=coun.getReg() %></td>
-					<td><%=coun.getC_state()%></td>
+					<td>${coun.c_id }</td>
+					<td>${coun.o_id }</td>
+					<td>${coun.c_categori }</td>
+					<td>${coun.id }</td>
+					<td><a href="ShowCounsel?c_id=${coun.c_id }" style="text-decoration: none; color: black;">${coun.title }</a></td>
+					<td>${coun.phone }</td>
+					<td>${coun.reg }</td>
+					<td>${coun.c_state }</td>
 				</tr>
-			<%
-						}
-					}
-				}
-			%>
+			</c:if>
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>

@@ -1,3 +1,4 @@
+<%@page import="com.company.common.MainURL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -13,7 +14,7 @@
 <meta name="author" content="" />
 <title>Shop Homepage - Start Bootstrap Template</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="http://localhost:8081/ShoppingMall/js/mainJs.js"></script>
+<script type="text/javascript" src="js/mainJs.js"></script>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Bootstrap icons-->
@@ -24,6 +25,7 @@
 <link href="css/styles.css" rel="stylesheet" />
 </head>
 <body >
+	<c:set value="<%=MainURL.getM_url() %>" var="mainUrl"/>
 	<!-- Section-->
 	<section class="py-5" style="float: left;height: auto;">
 		<h4>${totalCount }개 검색되었습니다.</h4>
@@ -35,7 +37,7 @@
 						<!-- Product image-->
 						<a href="ShopDetails?id=${p.p_id}">
 						<img class="card-img-top"
-							src="${p.p_url }" alt="..." />
+							src="${mainUrl }${p.p_url }" alt="..." />
 						</a>	
 						<!-- Product details-->
 						<div class="card-body p-4">

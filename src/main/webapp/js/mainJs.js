@@ -10,15 +10,14 @@ function select(zipcode, address) {
 	window.close();
 }
 function check_reg(){
-	var pw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
 
-	if(document.getElementsByName("id")[0].value.length==0){
-		alert("아이디를 입력하세요");
+	if($("#chkId").text()!='사용 가능'){
+		alert("아이디를 확인하세요");
 		document.getElementsByName("id")[0].focus();
-	}else if(!pw.test(document.getElementsByName("password")[0].value)){
+	}else if($('#chkPw').text()!='사용 가능'){
 		alert("패스워드를 입력하세요(8~16자리/특수문자 포함)");
 		document.getElementsByName("password")[0].focus();
-	}else if(document.getElementsByName("chkPw")[0].value.length==0){
+	}else if($("#chkPw2").text()!='일치'){
 		alert("패스워드를 확인하세요");
 		document.getElementsByName("chkPw")[0].focus();
 	}else if(document.getElementsByName("name")[0].value.length==0){
@@ -33,12 +32,10 @@ function check_reg(){
 	}else if(document.getElementsByName("dAd")[0].value.length==0){
 		alert("상세주소를 입력하세요");
 		document.getElementsByName("dAd")[0].focus();
-	}else if(document.getElementsByName("password")[0].value!=document.getElementsByName("chkPw")[0].value) {
-		alert("패스워드를 확인하세요");
-		document.getElementsByName("chkPw")[0].focus();
 	}else{
 		reg.submit();
 	}
+
 }
 function myPage(){
 my.submit();
@@ -111,7 +108,7 @@ function ckId() {
 		if(_id.length!=0){
 		$.ajax({
 			  type:'get',
-			  url:'http://localhost:8081/ShoppingMall/IdChk',
+			  url:'IdChk',
 			  data:{
 				  id:_id,
 				  }, 
@@ -155,7 +152,7 @@ function checkPw() {
 }
 
 function checkName() {
-	if(document.getElementsByName("chkPw")[0].value.length==0){
+	if(document.getElementsByName("name")[0].value.length==0){
 		$("#chkName").text("필수 정보입니다.").css("color","red");;
 	}else{
 		$("#chkName").text("")
@@ -168,7 +165,7 @@ function modify(f) {
 	
 	$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/Modify',
+			  url:'Modify',
 			  data:{
 				  id:_id,
 				  newInfo:_pw,
@@ -192,7 +189,7 @@ function modifyA() {
 	
 	$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/Modify',
+			  url:'Modify',
 			  data:{
 				  id:_id,
 				  nAd:_nAd,
@@ -226,7 +223,7 @@ function totalR(i) {
 	
 	$.ajax({
 			  type:'get',
-			  url:'http://localhost:8081/ShoppingMall/Reviews?id='+i, 
+			  url:'Reviews?id='+i, 
 			  async:true,
 			  success: function(data){
 				  	$("#"+i).text("("+data+")");
@@ -240,7 +237,7 @@ function avgG(i) {
 	
 	$.ajax({
 			  type:'get',
-			  url:'http://localhost:8081/ShoppingMall/ProductG?id='+i, 
+			  url:'ProductG?id='+i, 
 			  async:true,
 			  success: function(data){
 				  	return data;
@@ -261,7 +258,7 @@ function addBasket(i) {
 	if(_quantity>0){
 	$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/Basket', 
+			  url:'Basket', 
 			  async:true,
 			  data:{
 				  size:_size,
@@ -287,9 +284,12 @@ function dropBasket(i) {
 	
 	$.ajax({
 			  type:'get',
-			  url:'http://localhost:8081/ShoppingMall/DropBasket?num='+i, 
+			  url:'DropBasket', 
+			   data:{
+				  num:i,
+				  }, 
 			  async:true,
-			  success: function(data){
+			  success: function(){
 				  	alert("삭제되었습니다.")
 					location.reload();
 			  },
@@ -303,7 +303,7 @@ function allDrop() {
 	
 	$.ajax({
 			  type:'get',
-			  url:'http://localhost:8081/ShoppingMall/DropBasket', 
+			  url:'DropBasket', 
 			  async:true,
 			  success: function(data){
 				  	alert("삭제되었습니다.")
@@ -336,7 +336,7 @@ function allDrop() {
 				
 				$.ajax({
 				  	type:'post',
-				  	url:'http://localhost:8081/ShoppingMall/NewOrder', 
+				  	url:'NewOrder', 
 				   	data:{
 					  id:_id,
 					  p_id:_p_id,
@@ -357,11 +357,10 @@ function allDrop() {
 			}
 			alert("주문 완료");
 			location.href="index.jsp";
-
 		}
 		
 		function movePay(i) {
-		if(i==0){
+		if(i==undefined){
 			alert("등록된 상품이 없습니다.");
 		}else{
 			location.href="orderPage.jsp";
@@ -374,7 +373,7 @@ function pick(i,p,name) {
 	else{
 	$.ajax({
 			  type:'get',
-			  url:'http://localhost:8081/ShoppingMall/Pick', 
+			  url:'Pick', 
 			  async:true,
 			  	data:{
 					  id:i,
@@ -399,7 +398,7 @@ function pick(i,p,name) {
 function pickView(i,p) {
 	$.ajax({
 			  type:'get',
-			  url:'http://localhost:8081/ShoppingMall/PickView', 
+			  url:'PickView', 
 			  async:true,
 			  	data:{
 					  id:i,
@@ -420,7 +419,7 @@ function pickView(i,p) {
 function modOrder(id,i) {
 	$.ajax({
 			  type:'get',
-			  url:'http://localhost:8081/ShoppingMall/OrderState', 
+			  url:'OrderState', 
 			  async:true,
 			  	data:{
 			  		o_id:id,
@@ -446,7 +445,7 @@ function deleMem(i) {
 	if(confirm("삭제 하시겠습니까?")==true){
 	$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/DeleteMem', 
+			  url:'DeleteMem', 
 			  async:true,
 			  	data:{
 					  id:i,
@@ -471,7 +470,7 @@ function stateMod(m,i){
 	if(confirm(m+"처리 하시겠습니까?")==true){
 		$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/UpdateState', 
+			  url:'UpdateState', 
 			  async:true,
 			  	data:{
 					  o_id:i,
@@ -499,7 +498,7 @@ function updateEvent(event,p_id){
 		}
 		$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/UpdateEvent', 
+			  url:'UpdateEvent', 
 			  async:true,
 			  	data:{
 					  sale:sale,
@@ -524,7 +523,7 @@ function productReg(size,p_id){
 	formData.append("p_id",p_id)
 
 	$.ajax({
-		url: 'http://localhost:8081/ShoppingMall/DetailImg', 
+		url: 'DetailImg', 
 		type: 'POST',
 		data: formData,
  		processData: false,
@@ -554,7 +553,7 @@ function deleProduct(i) {
 	if(confirm("삭제 하시겠습니까?")==true){
 	$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/DeleteProduct', 
+			  url:'DeleteProduct', 
 			  async:true,
 			  	data:{
 					  id:i,
@@ -585,7 +584,7 @@ function deleImg(i) {
 	if(confirm("삭제 하시겠습니까?")==true){
 	$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/DeleteImg', 
+			  url:'DeleteImg', 
 			  async:true,
 			  	data:{
 					  id:i,
@@ -608,7 +607,7 @@ function deleImg(i) {
 	formData.append("p_id",p_id)
 
 	$.ajax({
-		url: 'http://localhost:8081/ShoppingMall/DetailImg', 
+		url: 'DetailImg', 
 		type: 'POST',
 		data: formData,
  		processData: false,
@@ -628,7 +627,7 @@ function updateProduct(size,p_id){
 	formData.append("p_id",p_id)
 
 	$.ajax({
-		url: 'http://localhost:8081/ShoppingMall/DetailImg', 
+		url: 'DetailImg', 
 		type: 'POST',
 		data: formData,
  		processData: false,
@@ -650,7 +649,7 @@ function answer(i,c_id){
 	var content = $("#content").val()
 	$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/InputAnswer', 
+			  url:'InputAnswer', 
 			  async:true,
 			  	data:{
 					  c_id:c_id,
@@ -669,7 +668,7 @@ function answer(i,c_id){
 function addManager(id,pw){
 	$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/AddManger', 
+			  url:'AddManger', 
 			  async:true,
 			  	data:{
 					  id:id,

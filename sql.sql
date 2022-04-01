@@ -16,7 +16,9 @@ insert into SHOPMEM values('abc123','abc123','홍길동','010-1234-1111','경기
 
 select * from zipcode where dong like '%망포%'
 
-SELECT * 
+SELECT SUBSTR(p_url, 35)  FROM tbl_product
+
+select * from tbl_img
 
 FROM ALL_TAB_COMMENTS
 
@@ -33,7 +35,8 @@ insert into shopMem (id,password,name,phone,address,nAd,dAd) values('zz','zz','z
 
 select * from tbl_product
 
-update tbl_product set p_desc = 'clock' where p_desc = 'watch' 
+
+update (select c_url as a, SUBSTR(c_url, 35) as b  from tbl_counsel ) set a = b
 
 create table tbl_product(
 	p_id number(20),
@@ -50,39 +53,8 @@ drop table tbl_product
 
 
 
-insert into tbl_product values(1,'컨버짭',30000,'shoes','sneakers','http://localhost:8081/ShoppingMall/img/product1.png','emerald','public')
+insert into tbl_product values((select max(p_id) from tbl_product)+1,'검은 티',7000,'/img/product5.png','black','public','zz',0,'xx')
 
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'헬창화',20000,'shoes','running','http://localhost:8081/ShoppingMall/img/product2.jpg','emerald','public')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'헬창화',20000,'shoes','running','http://localhost:8081/ShoppingMall/img/product2.jpg','emerald','public')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'나이키',50000,'shoes','running','http://localhost:8081/ShoppingMall/img/product3.jpg','white','man')
-
-delete from tbl_product where p_id =16
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'가죽 가방',70000,'etc.','bag','http://localhost:8081/ShoppingMall/img/product4.png','brown','public')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'검은 티',7000,'top','t-shirt','http://localhost:8081/ShoppingMall/img/product5.png','black','public','zz',0,'xx')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'청 반바지',40000,'bottom','jean','http://localhost:8081/ShoppingMall/img/product6.jpg','blue','man')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'검정 미니스커트',30000,'bottom','skirt','http://localhost:8081/ShoppingMall/img/product7.jpg','black','woman')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'레드 미니스커트',40000,'bottom','skirt','http://localhost:8081/ShoppingMall/img/product8.jpg','red','woman')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'검정 블레이저',120000,'outer','blazer','http://localhost:8081/ShoppingMall/img/product9.jpg','black','man')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'검정 코트',200000,'outer','coat','http://localhost:8081/ShoppingMall/img/product10.jpg','black','man')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'시계 팬던트',70000,'etc','necklace','http://localhost:8081/ShoppingMall/img/product11.jpg','brown','public')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'손목 시계',50000,'etc','watch','http://localhost:8081/ShoppingMall/img/product12.jpg','brown','public')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'후드집업',60000,'top','hood','http://localhost:8081/ShoppingMall/img/product13.jpg','black','man')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'후드티',50000,'top','hood','http://localhost:8081/ShoppingMall/img/product14.jpg','black','man')
-
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'다크진',80000,'bottom','jean','http://localhost:8081/ShoppingMall/img/product15.jpg','black','public')
 
 select count(p_id) from tbl_product where p_gender = 'man' or p_gender = 'public'
 
@@ -127,15 +99,6 @@ create table tbl_reivews(
 )
 drop table tbl_reivews
 
-select r_url from tbl_reivews order by r_url desc;
-
-insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values((select max(r_id) from tbl_reivews)+1,14,'고객','두번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',4.5)
-
-insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values((select max(r_id) from tbl_reivews)+1,14,'고객','세번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',3.8)
-
-insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values(0,14,'고객','네번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',5.0)
-
-select r_url from tbl_reivews order by r_id desc
 
 select count(r_id) from tbl_reivews where p_id = 14
 
@@ -187,7 +150,7 @@ insert into tbl_pick values('1','1','1','1')
 
 update tbl_pick set pick = 'no'
 
-update tbl_order set state = '배송 완료' where o_id = 18
+update tbl_order set state = '배송 완료' where o_id = 19
 
 insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values((select nvl(max(r_id),0)+1 from tbl_reivews),14,'고객','네번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',5.0)
 

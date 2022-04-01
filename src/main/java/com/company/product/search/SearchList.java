@@ -84,7 +84,6 @@ public class SearchList extends HttpServlet {
 			if (rs.next()) {
 				totalCount = rs.getInt(1);
 			}
-			
 			request.setAttribute("totalCount", totalCount);
 			request.setAttribute("pList", pList);
 			RequestDispatcher view = request.getRequestDispatcher("searchPage.jsp");

@@ -1,11 +1,6 @@
-<%@page import="com.company.bin.MemberBin"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>    
-<%
-ArrayList<MemberBin> mList = (ArrayList<MemberBin>) request.getAttribute("mList");
-%>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,28 +27,22 @@ ArrayList<MemberBin> mList = (ArrayList<MemberBin>) request.getAttribute("mList"
 						</tr>
 					</thead>
 					<tbody>
-						<%
-						if (mList != null) {
-							for (int i = 0; i < mList.size(); i++) {
-								MemberBin mem = mList.get(i);
-								if(mem.getGrade().equals("member")){
-						%>
+						<c:forEach items="${mList }" var="mem" varStatus="i">
+						<c:if test="${mem.grade == 'member' }">
 						<tr>
-							<td><input type="hidden" value="<%=mem.getId()%>" class="form-control"><span><%=mem.getId()%></span></td>
-							<td><span><%=mem.getName()%></span></td>
-							<td><span><%=mem.getPassword()%></span></td>
-							<td><span><%=mem.getPhone()%></span></td>
+							<td><input type="hidden" value="${mem.id }" class="form-control"><span>${mem.id }</span></td>
+							<td><span>${mem.name }</span></td>
+							<td><span>${mem.password }</span></td>
+							<td><span>${mem.phone }</span></td>
 							<td>
-								<span>(<%=mem.getnAd() %>)<%=mem.getAddress() %> <%=mem.getdAd() %></span>
+								<span>(${mem.nAd })${mem.address } ${mem.dAd }</span>
 							</td>
-							<td><span><%=mem.getGrade()%></span></td>
-							<td><span><%=mem.getReg()%></span></td>
-							<td align="center"><button class="btn btn-primary" onclick="addManager('<%=mem.getId() %>','<%=mem.getPassword() %>'); return false;">추가</button></td>
+							<td><span>${mem.grade }</span></td>
+							<td><span>${mem.reg }</span></td>
+							<td align="center"><button class="btn btn-primary" onclick="addManager('${mem.id }','${mem.password }'); return false;">추가</button></td>
 						</tr>
-						<%}
-						}
-						}
-						%>
+						</c:if>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

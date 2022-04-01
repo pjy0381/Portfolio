@@ -1,12 +1,7 @@
-<%@page import="com.company.bin.ProductList"%>
-<%@page import="com.company.bin.OrderList"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%!@SuppressWarnings("unchecked")%>    
-<%
-ArrayList<ProductList> pList = (ArrayList<ProductList>) request.getAttribute("pList");
-%>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,30 +23,25 @@ ArrayList<ProductList> pList = (ArrayList<ProductList>) request.getAttribute("pL
 				</tr>
 			</thead>
 			<tbody>
-			<%
-				if (pList != null) {
-					for (int i = 0; i < pList.size(); i++) {
-						ProductList product = pList.get(i);
-						int sale = 0;
-						if(product.getSale()!=0){sale = product.getSale();}
-			%>
+			<c:forEach items="${pList }" var="p" varStatus="i">
 				<tr>
-					<td><%=product.getP_id()%></td>
-					<td><a href="ShopDetails?id=<%=product.getP_id()%>" style="text-decoration: none; color: black;"><%=product.getP_name()%></a></td>
-					<td><%=product.getP_price()%></td>
-					<td><%=product.getP_categori() %></td>
-					<td> <span id="event<%=i%>"><%=product.getEvent() %></span></td>
+					<td>${p.p_id }</td>
+					<td><a href="ShopDetails?id=${p.p_id }" style="text-decoration: none; color: black;">${p.p_name }</a></td>
 					<td>
-						<input type="text" class="form-control" style="display: inline-block; width: 80%" value="<%=sale%>" id="_sale<%=product.getP_id()%>" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-						<span style="display: none;"><%=sale %></span>
+						<c:set var="num" value="${p.p_price }"/>
+						<fmt:setLocale value="ko_kr"/>
+						<fmt:formatNumber value="${num }" groupingUsed="true" type="currency"/>
+					</td>
+					<td>${p.p_categori}</td>
+					<td> <span id="event${i.count - 1 }">${p.event }</span></td>
+					<td>
+						<input type="text" class="form-control" style="display: inline-block; width: 80%" value="${p.sale }" id="_sale${p.p_id}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+						<span style="display: none;">${p.sale }</span>
 						<span> % </span>
 					</td>
-					<td align="center"><input type="button" class="btn btn-primary" value="전송" onclick="updateEvent('yes',<%=product.getP_id()%>)"></td>
+					<td align="center"><input type="button" class="btn btn-primary" value="전송" onclick="updateEvent('yes',${p.p_id })"></td>
 				</tr>
-			<%
-				}
-			}
-			%>
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>

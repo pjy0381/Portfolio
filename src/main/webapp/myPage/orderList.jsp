@@ -11,8 +11,11 @@
 <c:set var="agoWeek" value="<%=new Date(new Date().getTime() - 60*60*24*1000*14)%>"/>
 <fmt:formatDate value="${agoWeek }" pattern="yyyy-MM-dd" var="agoWeek"/>
 </head>
-<body onload="state(${oList.size()})">
-	<table class="table">
+<body>
+    <div class="input-group" style="float: right;">
+    	<input type="search" id="searchBox" placeholder="검색" class="form-control">
+    </div>
+	<table class="myTable table hover">
 		<thead>
 			<tr>
 				<th>주문번호</th>

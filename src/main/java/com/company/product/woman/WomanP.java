@@ -85,9 +85,10 @@ public class WomanP extends HttpServlet {
 				totalCount = rs.getInt(1);
 			}
 			
+			if(categori=="%%") {categori = "main";}
 			request.setAttribute("totalCount", totalCount);
 			request.setAttribute("pList", pList);
-			if(request.getParameter("categori") != null) {request.setAttribute("categori", categori);}
+			request.setAttribute("categori", categori);
 			RequestDispatcher view = request.getRequestDispatcher("womanPage.jsp");
 			view.forward(request, response);
 

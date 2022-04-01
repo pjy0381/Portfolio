@@ -87,7 +87,8 @@ public class ManP extends HttpServlet {
 			
 			request.setAttribute("totalCount", totalCount);
 			request.setAttribute("pList", pList);
-			if(request.getParameter("categori") != null) {request.setAttribute("categori", categori);}
+			if(categori=="%%") {categori = "main";}
+			request.setAttribute("categori", categori);
 			RequestDispatcher view = request.getRequestDispatcher("manPage.jsp");
 			view.forward(request, response);
 

@@ -55,6 +55,6 @@
 		</table>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script type="text/javascript" src="http://localhost:8081/ShoppingMall/js/mainJs.js"></script>
+	<script type="text/javascript" src="js/mainJs.js"></script>
 </body>
 </html>

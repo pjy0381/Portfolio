@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%String name = (String)request.getAttribute("name"); 
-	if(name == null) name = "";%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +11,7 @@
 	<form action="FindID" method="post">
 		<table class="table">
 			<tr>
-				<td><input name="name" class="form-control" placeholder="이름을 입력하세요" value="<%=name%>"></td>
+				<td><input name="name" class="form-control" placeholder="이름을 입력하세요" value="${name }"></td>
 				<td>
 					<div class="input-group-btn">
 						<button type="submit" class="btn btn-default">

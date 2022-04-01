@@ -1,7 +1,9 @@
+<%@page import="com.company.common.MainURL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +38,7 @@
 
 	<header class="header"><jsp:include page="header.jsp" />
 	</header>
-
+	<c:set value="<%=MainURL.getM_url() %>" var="mainUrl"/>
 	<!-- Product Details Section Begin -->
 	<section class="product-details spad"
 		style="height: auto; padding-bottom: 250px">
@@ -46,11 +48,11 @@
 					<div class="product__details__pic">
 						<div class="product__details__pic__item">
 							<img class="product__details__pic__item--large"
-								src="${p.p_url }" alt="">
+								src="${mainUrl }${p.p_url }" alt="">
 						</div>
 						<div class="product__details__pic__slider owl-carousel">
 						<c:forEach items="${iList }" var="img" >
-							<img data-imgbigurl="${img.url }" src="${img.url }" alt=""> 
+							<img data-imgbigurl="${mainUrl }${img.url }" src="${mainUrl }${img.url }" alt=""> 
 						</c:forEach>
 						</div>
 					</div>
@@ -114,7 +116,7 @@
 								<div class="product__details__tab__desc">
 									<p>
 									<c:forEach items="${iList }" var="img" >
-										<img src="${img.url }" alt=""> 
+										<img src="${mainUrl }${img.url }" alt=""> 
 									</c:forEach>
 									</p>
 								</div>

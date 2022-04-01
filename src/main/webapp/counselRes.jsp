@@ -1,3 +1,4 @@
+<%@page import="com.company.common.MainURL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
@@ -11,10 +12,10 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script type="text/javascript" src="http://localhost:8081/ShoppingMall/js/mainJs.js"></script>
-	
+	<script type="text/javascript" src="js/mainJs.js"></script>
 </head>
 <body>
+<c:set value="<%=MainURL.getM_url() %>" var="mainUrl"/>
 <div class="main">
 	<header class="header"><jsp:include page="header.jsp" /></header>
 	<section style="min-height: 1200px; height: auto; ">
@@ -39,7 +40,7 @@
 					<td style="border: none;"></td>
 					<td style="border: none;"> 
 						<div class="col-md-3 mt-1" style="width: 100%;">
-							<img class="img-fluid img-responsive rounded product-image"src="${counsel.c_url }" onerror="this.parentNode.style.display='none'">
+							<img class="img-fluid img-responsive rounded product-image"src="${mainUrl }${counsel.c_url }" onerror="this.parentNode.style.display='none'">
 						</div>
 					 </td>
 					<td style="border: none;"></td>

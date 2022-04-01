@@ -20,10 +20,10 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="Manager?mod=addManager">관리자 등록</a>
-                                    <a class="nav-link" href="Manager?mod=modMemM">회원 수정/삭제</a>
-                                    <a class="nav-link" href="Manager?mod=counselListN">문의 사항</a>
-                                    <a class="nav-link" href="Manager?mod=counselListY">답변 완료</a>
+                                    <a class="nav-link" href="Manager?mode=addManager">관리자 등록</a>
+                                    <a class="nav-link" href="Manager?mode=modMemM">회원 수정/삭제</a>
+                                    <a class="nav-link" href="Manager?mode=counselListN">문의 사항</a>
+                                    <a class="nav-link" href="Manager?mode=counselListY">답변 완료</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -38,8 +38,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="Manager?mod=productRegist">등록</a>
-                                            <a class="nav-link" href="Manager?mod=productList">수정/삭제</a>
+                                            <a class="nav-link" href="Manager?mode=productRegist">등록</a>
+                                            <a class="nav-link" href="Manager?mode=productList">수정/삭제</a>
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
@@ -48,17 +48,18 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="Manager?mod=orderList">주문 처리</a>
-                                            <a class="nav-link" href="Manager?mod=sendList">발송 처리</a>
-                                            <a class="nav-link" href="Manager?mod=returnList">반품 처리</a>
-                                            <a class="nav-link" href="Manager?mod=cancleList">취소 처리</a>
+                                            <a class="nav-link" href="Manager?mode=orderList">주문 처리</a>
+                                            <a class="nav-link" href="Manager?mode=sendList">발송 처리</a>
+                                            <a class="nav-link" href="Manager?mode=completedList">배송 처리</a>
+                                            <a class="nav-link" href="Manager?mode=returnList">반품 처리</a>
+                                            <a class="nav-link" href="Manager?mode=cancleList">취소 처리</a>
                                         </nav>
                                     </div>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">이벤트 품목 관리</div>
-                            <a class="nav-link" href="Manager?mod=eventAdd">추가/변경</a>
-                            <a class="nav-link" href="Manager?mod=eventDele">삭제</a>
+                            <a class="nav-link" href="Manager?mode=eventAdd">추가/변경</a>
+                            <a class="nav-link" href="Manager?mode=eventDele">삭제</a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

@@ -27,7 +27,7 @@ function getMonth(i) {
 	var result = "";
 	$.ajax({
 			  type:'post',
-			  url:'http://localhost:8081/ShoppingMall/MonthSales', 
+			  url:'MonthSales', 
 			  async:false,
 			  	data:{
 			  		month:getMonth2(i),

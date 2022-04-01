@@ -1,3 +1,4 @@
+<%@page import="com.company.common.MainURL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -31,6 +32,7 @@
 </head>
 
 <body>
+<c:set value="<%=MainURL.getM_url() %>" var="mainUrl"/>
 <div class="main">
 	<header class="header"><jsp:include page="header.jsp"/></header>
     <!-- Shoping Cart Section Begin -->
@@ -54,7 +56,7 @@
                             <c:forEach items="${basketList }" var="bas" varStatus="i">
                              <tr>
                                     <td class="col-md-3 mt-1" >
-                                        <img src="${bas.url }" alt="" class="img-fluid img-responsive rounded product-image">
+                                        <img src="${mainUrl }${bas.url }" alt="" class="img-fluid img-responsive rounded product-image">
                                         <h5>${bas.name }</h5>
                                     </td>
                                     <td class="shoping__cart__price" >
@@ -70,7 +72,7 @@
 										<fmt:formatNumber value="${price }" groupingUsed="true" type="currency"/>
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        <span class="bi bi-x" onclick="dropBasket(${i});return false;"></span>
+                                        <span class="bi bi-x" onclick="dropBasket(${i.count-1});return false;"></span>
                                     </td>
                                     <c:set var="total" value="${total+price }"/>
                                 </tr>

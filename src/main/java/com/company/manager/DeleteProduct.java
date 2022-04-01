@@ -36,6 +36,7 @@ public class DeleteProduct extends HttpServlet {
 			stmt.close();
 			
 			sql = "delete from tbl_img where p_id = ?";
+			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, id);
 			stmt.executeUpdate();
 

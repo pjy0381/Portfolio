@@ -1,3 +1,4 @@
+<%@page import="com.company.common.MainURL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
@@ -13,6 +14,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 </head>
 <body>
+	<c:set value="<%=MainURL.getM_url() %>" var="mainUrl"/>
 	<div class="container mt-5 mb-5">
 		<div class="d-flex justify-content-center row">
 		<c:forEach items="${rList }" var="r" varStatus="i">
@@ -20,7 +22,7 @@
 				<div class="row p-2 bg-white border rounded">
 					<div class="col-md-3 mt-1">
 						<img class="img-fluid img-responsive rounded product-image"
-							src="${r.r_url }">
+							src="${mainUrl }${r.r_url }">
 					</div>
 					<div class="d-flex justify-content-center small text-warning mb-2">
 						<c:forEach begin="1" end="${r.r_grade }" step="1" var="k">

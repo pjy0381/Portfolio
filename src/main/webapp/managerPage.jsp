@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%String mod = "main";
-if(request.getParameter("mod")!=null){ mod = request.getParameter("mod");}
-String url = "manager/"+mod+".jsp";
-%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html >
+	<c:set var="mode" value="${param.mode }"/>
+	<c:if test="${param.mode == null}">
+		<c:set value="main" var="mode"/>
+	</c:if>
+		
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,6 +17,7 @@ String url = "manager/"+mod+".jsp";
         <title>관리자 페이지</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/ManagerStyles.css" rel="stylesheet" />
+        
     	<c:if test="${power != 'yes' }">
     		<c:redirect url="index.jsp"/>
     	</c:if>
@@ -28,7 +30,7 @@ String url = "manager/"+mod+".jsp";
            <jsp:include page="manager/sidebarM.jsp"/>
             <div id="layoutSidenav_content">
                 <main>
-                    <jsp:include page="<%=url%>"/>
+                    <jsp:include page="manager/${mode }.jsp"/>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                 	<jsp:include page="manager/footerM.jsp"/>

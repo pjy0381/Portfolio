@@ -19,24 +19,19 @@
 		<form action="NewPW" method="post" name="newPW">
 			<table class="table">
 				<tr>
-					<td><input type="text" value="${id }" name="id" readonly="readonly" class="form-control">
-					</td>
+					<td><input type="text" value="${id }" name="id" readonly="readonly" class="form-control"></td>
 				</tr>
 				<tr>
-					<td><input type="text" value="${name }" name="name" readonly="readonly" class="form-control">
-					</td>
+					<td><input type="text" value="${name }" name="name" readonly="readonly" class="form-control"></td>
 				</tr>
 				<tr>
-					<td><input type="password" name="password" placeholder="새로운 비밀번호를 입력하세요(8~16/특수문자 포함)" class="form-control">
-					</td>
+					<td><input type="password" name="password" placeholder="새로운 비밀번호를 입력하세요(8~16/특수문자 포함)" class="form-control"></td>
 				</tr>
 				<tr>
-					<td><input type="password" name="chkPw" placeholder="비밀번호를 한번 더 입력하세요" class="form-control">
-					</td>
+					<td><input type="password" name="chkPw" placeholder="비밀번호를 한번 더 입력하세요" class="form-control"></td>
 				</tr>
 				<tr>
-					<td align="center"><input type="button" value="비밀번호 변경" class="btn btn-primary" onclick="newP();return false;">
-					</td>
+					<td align="center"><input type="button" value="비밀번호 변경" class="btn btn-primary" onclick="newP();return false;"></td>
 				</tr>
 			</table>
 		</form>

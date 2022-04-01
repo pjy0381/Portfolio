@@ -42,7 +42,7 @@ public class CounselReg extends HttpServlet {
 		String phone = multi.getParameter("phone");
 		String title = multi.getParameter("title");
 		String content = multi.getParameter("content");
-		String c_url = "http://localhost:8081/ShoppingMall/img/counsel/"+file;
+		String c_url = "/img/counsel/"+file;
 		int o_id = Integer.parseInt(multi.getParameter("o_id"));
 		
 		

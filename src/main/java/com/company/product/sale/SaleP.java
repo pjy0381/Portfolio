@@ -82,6 +82,7 @@ public class SaleP extends HttpServlet {
 			if (rs.next()) {
 				totalCount = rs.getInt(1);
 			}
+			if(categori=="%%") {categori = "main";}
 			
 			request.setAttribute("totalCount", totalCount);
 			request.setAttribute("pList", pList);

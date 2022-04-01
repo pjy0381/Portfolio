@@ -88,7 +88,7 @@ public class ShopDetails extends HttpServlet {
 		rs.close();
 		stmt.close();
 		
-		sql = "select * from tbl_img where p_id = ?";
+		sql = "select * from tbl_img where p_id = ? order by id";
 		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, id);
 		

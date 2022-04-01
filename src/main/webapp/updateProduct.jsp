@@ -1,3 +1,4 @@
+<%@page import="com.company.common.MainURL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
@@ -19,9 +20,11 @@ width: 20%;
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/ManagerStyles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-		<script type="text/javascript" src="http://localhost:8081/ShoppingMall/js/mainJs.js"></script>
+		<script type="text/javascript" src="js/mainJs.js"></script>
+	
 </head>
 <body onload="selcetVal('${p.p_categori }','${p.p_gender }','${p.p_color }')">
+<c:set value="<%=MainURL.getM_url() %>" var="mainUrl"/>
 	<form enctype="multipart/form-data" name="formWithFiles" id="formWithFiles" action="UpdateProduct" method="post" style="margin-top: 20px">
 		<h1 align="center" style="margin-bottom: 20px">상품 수정</h1>
 		<table class="table">
@@ -87,7 +90,7 @@ width: 20%;
 				<td class="firT" style="border: none;"> 메인 사진 : </td>
 				<td style="border: none;">
 					<div class="col-md-3 mt-1" style="width: 100%;">
-						<img class="img-fluid img-responsive rounded product-image" src="${p.p_url }" id="mainImg" onerror="this.parentNode.style.display='none'" >
+						<img class="img-fluid img-responsive rounded product-image" src="${mainUrl }${p.p_url }" id="mainImg" onerror="this.parentNode.style.display='none'" >
 					</div>
 				</td>
 			</tr>
@@ -115,7 +118,7 @@ width: 20%;
 				<td style="border: none;"><input type="button" value="X" onclick="deleImg(${img.id})" class="form-control"></td>
 				<td style="border: none;">
 					<div class="col-md-3 mt-1" style="width: 100%;">
-						<img class="img-fluid img-responsive rounded product-image" src="${img.url }" onerror="this.parentNode.style.display='none'">
+						<img class="img-fluid img-responsive rounded product-image" src="${mainUrl }${img.url }" onerror="this.parentNode.style.display='none'">
 					</div>
 				</td>
 			</tr>

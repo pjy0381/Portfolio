@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>        
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="http://localhost:8081/ShoppingMall/js/mainJs.js"></script>
+<script type="text/javascript" src="js/mainJs.js"></script>
 <style type="text/css">
 .form-control{
 width: 50%;
@@ -99,11 +100,11 @@ width: 10%;
 			<td style="border: none;">
 				<input type="button" value="사진 추가" onclick="addImg(4)" class="btn btn-primary">
 				<input type="button" value="사진 제거" onclick="minusImg()" class="btn btn-primary">
-				<%for(int i = 0; i<4;i++){ %>
-					<form enctype="multipart/form-data" name="formWithFiles" id="formWithFiles<%=i%>" style="display: none;">
+				<c:forEach begin="0" end="3" step="1" var="i">
+					<form enctype="multipart/form-data" name="formWithFiles" id="formWithFiles${i }" style="display: none;">
 						<input type="file"  name="filename1" class="form-control">
 					</form>
-				<%} %>
+				</c:forEach>
 			</td>
 		</tr>
 		<tr>

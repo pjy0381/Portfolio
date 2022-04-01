@@ -9,22 +9,26 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body onload="state(${oList.size()})">
+<body >
 <c:set var="agoWeek" value="<%=new Date(new Date().getTime() - 60*60*24*1000*7)%>"/>
 <fmt:formatDate value="${agoWeek }" pattern="yyyy-MM-dd" var="agoWeek"/>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>주문번호</th>
-				<th style="width: 50%">주문내역</th>
-				<th>구매자</th>
-				<th>주문 상태</th>
-				<th>주문 날짜</th>
-				<th>반품 신청</th>
-				<th>주문 취소	</th>
-			</tr>
-		</thead>
-		<tbody>
+
+    <div class="input-group" style="float: right;">
+    	<input type="search" id="searchBox" placeholder="검색" class="form-control" >
+    </div>
+    <table class="myTable table hover">
+        <thead>
+        <tr>
+			<th>주문번호</th>
+			<th style="width: 50%">주문내역</th>
+			<th>구매자</th>
+			<th>주문 상태</th>
+			<th>주문 날짜</th>
+			<th>반품 신청</th>
+			<th>주문 취소	</th>
+        </tr>
+        </thead>
+        <tbody>
 		<c:forEach items="${oList }" var="order" varStatus="i">
 			<tr>
 				<td>${order.o_id }</td>
@@ -49,7 +53,7 @@
 				</td>
 			</tr>	
 		</c:forEach>
-		</tbody>
-	</table>
+        </tbody>
+    </table>
 </body>
 </html>

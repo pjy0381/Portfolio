@@ -1,3 +1,4 @@
+<%@page import="com.company.common.MainURL"%>
 <%@page import="oracle.net.aso.p"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -21,6 +22,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 </head>
 <body>
+	<c:set value="<%=MainURL.getM_url() %>" var="mainUrl"/>
 	<c:set var="total" value="0"/>
 	<header class="header"><jsp:include page="header.jsp" /></header>
 	<section style="height: auto; min-height: 1000px;">
@@ -31,7 +33,7 @@
 					<div class="row p-2 bg-white border rounded">
 						<div class="col-md-3 mt-1" style="width: 20%;">
 							<img class="img-fluid img-responsive rounded product-image"
-								src="${bas.url }">
+								src="${mainUrl }${bas.url }">
 						</div>
 						<div class="col-md-6 mt-1" style="width: 80%; float: left;">
 							<table class="table">
@@ -77,32 +79,32 @@
 				<tr>
 					<td>받으시는 분:</td>
 					<td><input type="text" name="name" value="${name }"
-						class="form-control"></td>
+						class="form-control" id="name"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>연락처:</td>
 					<td><input type="text" name="phone" value="${phone }"
-						class="form-control"></td>
+						class="form-control" id="phone"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>배송 주소:</td>
 					<td><input type="text" name="nAd" value="${nad }"
-						class="form-control"></td>
+						class="form-control" id="nAd"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td><input name="address" type="text" value="${address }"
-						class="form-control"></td>
+						class="form-control" id="address"></td>
 					<td><button class="btn btn-primary"
 							onclick="openPopupA('address.jsp'); return false;">검색</button></td>
 				</tr>
 				<tr>
 					<td>상세 주소:</td>
 					<td><input type="text" name="dAd" value="${dad }"
-						class="form-control"></td>
+						class="form-control" id="dAd"></td>
 					<td></td>
 				</tr>
 			</table>

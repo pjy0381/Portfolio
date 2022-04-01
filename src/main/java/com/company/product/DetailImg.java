@@ -42,7 +42,7 @@ public class DetailImg extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			int p_id = Integer.parseInt(multi.getParameter("p_id"));
 			
-			String url = "http://localhost:8081/ShoppingMall/img/detail/";
+			String url = "/img/detail/";
 			url+=file;
 			
 			Connection conn = null;

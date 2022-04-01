@@ -1,18 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-int totalCount = 1;
-if (request.getAttribute("totalCount") != null) {
-	totalCount = (int) request.getAttribute("totalCount");
-}
-
-int pg = 1;
-if (request.getParameter("page") != null) {
-	pg = Integer.parseInt(request.getParameter("page"));
-	
-	
-}
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,14 +14,21 @@ if (request.getParameter("page") != null) {
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <body>
 <div class="main">
+	<c:if test="${totalCount == null }">
+		<c:set value="1" var="totalCount"/>
+	</c:if>
+	<c:set value="${param.page }" var="pg"/>
+	<c:if test="${pg == null }">
+		<c:set value="1" var="pg"/>
+	</c:if>
 	<header class="header"><jsp:include page="header.jsp"/></header>
 	<section class="sideProduct" > <jsp:include page="productSidebar/mainSidebar.jsp"/> </section>
 	<section style="height: auto; float: left; width: 80%; " id="se">
 		<main class="card-body" style="height: auto; float: left;"><jsp:include page="productPage/searchPage.jsp"/></main>
 		<div class="paging">
 		<jsp:include page="page/getPage.jsp">
-			<jsp:param value="<%=totalCount%>" name="totalCount" />
-			<jsp:param value="<%=pg%>" name="pg" />
+			<jsp:param value="${totalCount }" name="totalCount" />
+			<jsp:param value="${pg }" name="pg" />
 		</jsp:include>
 	</div>
 	</section>

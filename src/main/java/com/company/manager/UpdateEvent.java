@@ -23,6 +23,7 @@ public class UpdateEvent extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String event = request.getParameter("event");
+		System.out.println(request.getParameter("sale"));
 		int sale = Integer.parseInt(request.getParameter("sale"));
 		int p_id = Integer.parseInt(request.getParameter("p_id"));
 		

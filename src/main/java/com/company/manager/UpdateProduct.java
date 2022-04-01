@@ -41,7 +41,7 @@ public class UpdateProduct extends HttpServlet {
 		
 		
 		
-		String url = "http://localhost:8081/ShoppingMall/img/";
+		String url = "/img/";
 		url+=file;
 		
 		

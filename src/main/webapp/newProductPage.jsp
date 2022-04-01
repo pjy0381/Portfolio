@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +11,6 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <body>
 <div class="main">
-	<c:if test="${categori== null} ">
-		<c:set var="categori" value="main"/>
-	</c:if>
 	<header class="header"><jsp:include page="header.jsp"/></header>
 	<section class="sideProduct"> <jsp:include page="productSidebar/${categori }Sidebar.jsp"/> </section>
 	<section style="height: auto; float: left; width: 80%; " id="se">

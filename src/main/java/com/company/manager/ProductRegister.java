@@ -50,7 +50,7 @@ public class ProductRegister extends HttpServlet {
 			String p_info = multi.getParameter("p_info");
 			
 			
-			String url = "http://localhost:8081/ShoppingMall/img/";
+			String url = "/img/";
 			url+=file;
 			
 			Connection conn = null;

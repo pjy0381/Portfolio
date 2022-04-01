@@ -41,11 +41,15 @@ public class Upload extends HttpServlet {
 
 	        file = multi.getFilesystemName(str); // 업로드 된 파일 이름 가져옴
 	        
+	    	String r_url = "img/reviews/"+file;
+	        
+	        
 	        request.setCharacterEncoding("utf-8");
 			String p_id = multi.getParameter("p_id");
 			String writer = multi.getParameter("writer");
 			String r_content = multi.getParameter("r_content");
-			String r_url = "http://localhost:8081/ShoppingMall/img/reviews/"+file;
+			
+			
 			double r_grade = Double.parseDouble(multi.getParameter("r_grade"));
 			int o_id = Integer.parseInt(multi.getParameter("o_id"));
 			

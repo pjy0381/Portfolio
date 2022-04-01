@@ -60,6 +60,7 @@ public class NewP extends HttpServlet {
 				pList.add(p);
 			}
 			request.setAttribute("pList", pList);
+			if(categori=="%%") {categori = "main";}
 			request.setAttribute("categori", categori);
 			RequestDispatcher view = request.getRequestDispatcher("newProductPage.jsp");
 			view.forward(request, response);

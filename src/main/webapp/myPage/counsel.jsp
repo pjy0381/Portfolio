@@ -8,7 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table class="table">
+    <div class="input-group" style="float: right;">
+    	<input type="search" id="searchBox" placeholder="검색" class="form-control">
+    </div>
+	<table class="myTable table hover">
 		<thead>
 			<tr>
 				<th>문의 유형</th>

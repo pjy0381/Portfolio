@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:set var="totalCount" value="${param.totalCount }"/>
+<c:set var="totalCount" value="${totalCount }"/>
 <c:set var="pg" value="${param.pg }"/>
 <c:set var="countList" value="12"/>
 <c:set var="countPage" value="10"/>
@@ -43,7 +43,7 @@
 	<a href="" onclick="GoPage(${pg},${pg+1 });return false">다음</a>
 </c:if>
 <c:if test="${endPage < totalPage }">
-	<a href="" onclick="GoPage(${pg},${totalPage });return false">끝${countPage }</a>
+	<a href="" onclick="GoPage(${pg},${totalPage });return false">끝</a>
 </c:if>
 </body>
 </html>
