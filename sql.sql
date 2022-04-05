@@ -9,8 +9,9 @@ create table shopMem(
 	,dAd varchar2 (50)
 	)
 drop table shopMem
+select * from tbl_manager where id = 'pjy0673'
 
-select * from shopMem
+select * from tbl_manager where id = '1' and name = '1'
 
 insert into SHOPMEM values('abc123','abc123','홍길동','010-1234-1111','경기도 수원시','2011-11-11')
 
@@ -236,3 +237,12 @@ insert into tbl_manager values('abcd','1234')
 select * from tbl_product where p_gender in('man','public') and p_desc like '%%' order by p_id desc
 
 select count(p_id) from tbl_product where p_name like '%%' and p_desc like '%%' and p_color like '%%' 
+
+SELECT SUM(CASE WHEN pdate LIKE '202204' THEN price END) FROM tbl_order GROUP BY TO_CHAR(pdate, 'yyyymm') 
+
+select sum(price) from tbl_order where pdate>= TO_DATE(?,'YYYY/MM/DD') and pdate<TO_DATE(?,'YYYY/MM/DD')
+
+SELECT 
+   SUM(CASE WHEN pdate LIKE '201610%' THEN price END) #월별 누계
+FROM tbl_order
+GROUP BY TO_CHAR(pdate, 'yyyymm') #월별 누계

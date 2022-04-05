@@ -55,7 +55,11 @@
 							<td>${order.o_id }</td>
 							<td><a href="ShopDetails?id=${order.p_id }" style="text-decoration: none; color: black;">${order.o_name }</a></td>
 							<td>${order.o_name }</td>
-							<td>${order.price }</td>
+							<td>
+								<c:set var="num" value="${order.price }"/>
+								<fmt:setLocale value="ko_kr"/>
+								<fmt:formatNumber value="${num }" groupingUsed="true" type="currency"/>	
+							</td>
 							<td>${order.pay }</td>
 							<td>${order.pdate }</td>
 						</tr>

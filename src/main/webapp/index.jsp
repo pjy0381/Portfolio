@@ -20,6 +20,7 @@
 	<header class="header"><jsp:include page="header.jsp" /></header>
 	<section style="min-height: 1200px; height: auto; "><jsp:include page="${webApp }.jsp" /></section>
 	<footer><jsp:include page="footer.jsp"/></footer>
+
 </div>
 </body>
 </html>

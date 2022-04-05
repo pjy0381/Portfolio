@@ -425,7 +425,7 @@ function modOrder(id,i) {
 			  		o_id:id,
 					  state:i,
 					  }, 
-			  success: function(data){
+			  success: function(){
 			  	alert("요청 완료")
 			  },
 			  error : function() {
@@ -656,7 +656,7 @@ function answer(i,c_id){
 					  content:content,
 					  id:i
 					  }, 
-			  success: function(data){
+			  success: function(){
 			  	alert("등록 되었습니다.");
 			  	location.reload();
 			  },
@@ -674,7 +674,7 @@ function addManager(id,pw){
 					  id:id,
 					  password:pw
 					  }, 
-			  success: function(data){
+			  success: function(){
 			  	alert("추가 되었습니다.");
 			  	location.reload();
 			  },

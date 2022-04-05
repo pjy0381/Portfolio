@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="js/mainJs.js"></script>
 </head>
-<body>
+<body >
 	<h1>회원가입</h1>
 		<form name="reg" action="Register" method="post">
 		<table class="table" style="width: 400px;">
