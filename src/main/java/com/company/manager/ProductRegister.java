@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.company.common.JDBCCon;
+import com.company.common.MainURL;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -26,7 +27,7 @@ public class ProductRegister extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = "C:\\JavaWorks2\\ShoppingMall\\src\\main\\webapp\\img"; // 저장할 경로
+		String path = MainURL.getM_link(); // 저장할 경로
 
 		int size = 1024 * 1024 * 10; // 저장가능한 파일 크기
 		String file = ""; // 업로드 한 파일의 이름(이름이 변경될수 있다)

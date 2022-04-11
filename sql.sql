@@ -8,7 +8,9 @@ create table shopMem(
 	,nAd varchar2 (50)
 	,dAd varchar2 (50)
 	)
+	
 drop table shopMem
+
 select * from tbl_manager where id = 'pjy0673'
 
 select * from tbl_manager where id = '1' and name = '1'

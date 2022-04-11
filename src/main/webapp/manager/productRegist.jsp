@@ -101,7 +101,7 @@ width: 10%;
 				<input type="button" value="사진 추가" onclick="addImg(4)" class="btn btn-primary">
 				<input type="button" value="사진 제거" onclick="minusImg()" class="btn btn-primary">
 				<c:forEach begin="0" end="3" step="1" var="i">
-					<form enctype="multipart/form-data" name="formWithFiles" id="formWithFiles${i }" style="display: none;">
+					<form enctype="multipart/form-data" name="formWithFiles" id="formWithFiles${i-1 }" style="display: none;">
 						<input type="file"  name="filename1" class="form-control">
 					</form>
 				</c:forEach>

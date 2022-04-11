@@ -10,7 +10,7 @@ Kakao.init('2eb5689fe1f3c4cbf5bbdcccc9e5132b');
           success: function (response) {
   		        var email = response.kakao_account.email;
   		        var name = response.properties.nickname;
-				$.ajax({
+			$.ajax({
 			  	type:'post',
 			  	url:'AnotherLogin', 
 			  	async:true,
@@ -43,4 +43,5 @@ Kakao.init('2eb5689fe1f3c4cbf5bbdcccc9e5132b');
       },
     })
   }
+
 
