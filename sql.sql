@@ -7,17 +7,20 @@ create table shopMem(
   ,	reg date default sysdate
 	,nAd varchar2 (50)
 	,dAd varchar2 (50)
+	,grade varchar2 (50)
 	)
 	
 drop table shopMem
+
+select * from zipcode where dong like '옥천동';
 
 select * from tbl_manager where id = 'pjy0673'
 
 select * from tbl_manager where id = '1' and name = '1'
 
-insert into SHOPMEM values('abc123','abc123','홍길동','010-1234-1111','경기도 수원시','2011-11-11')
+insert into SHOPMEM values('abc123','abc123','�솉湲몃룞','010-1234-1111','寃쎄린�룄 �닔�썝�떆','2011-11-11')
 
-select * from zipcode where dong like '%망포%'
+select * from zipcode where dong like '%留앺룷%'
 
 SELECT SUBSTR(p_url, 35)  FROM tbl_product
 
@@ -50,18 +53,21 @@ create table tbl_product(
 	p_url varchar2(500),
 	p_color varchar2(10),
 	p_gender varchar2(10),
+	event varchar2(10),
+	sale varchar2(10),
+	p_info varchar2(100),
 	primary key(p_id)
 ) 
 drop table tbl_product
 
 
 
-insert into tbl_product values((select max(p_id) from tbl_product)+1,'검은 티',7000,'/img/product5.png','black','public','zz',0,'xx')
+insert into tbl_product values((select max(p_id) from tbl_product)+1,'寃��� �떚',7000,'/img/product5.png','black','public','zz',0,'xx')
 
 
 select count(p_id) from tbl_product where p_gender = 'man' or p_gender = 'public'
 
-update tbl_product set p_name = '시계 펜던트' where  p_id = 11;
+update tbl_product set p_name = '�떆怨� �렂�뜕�듃' where  p_id = 11;
 
 select * from tbl_product where p_gender in ('man','public')
 
@@ -81,7 +87,7 @@ update TBL_PRODUCT set sale = 20 where p_id = 6;
 
 select * from (select rownum as rnum,B.* from (select * from tbl_product where event = 'yes' and p_categori = 'bottom' order by p_id desc) B) where rnum between 1 and 12
 
-select * from (select rownum as rnum,B.* from (select * from tbl_product where p_name like '%검%' order by p_id desc) B) where rnum between 1 and 12
+select * from (select rownum as rnum,B.* from (select * from tbl_product where p_name like '%寃�%' order by p_id desc) B) where rnum between 1 and 12
 
 select * from tbl_product where p_name like '%%'
 
@@ -125,11 +131,11 @@ create table tbl_order(
 	primary key(o_id)
 )
 
-ALTER TABLE tbl_order MODIFY state varchar2(30) DEFAULT '주문 요청';
+ALTER TABLE tbl_order MODIFY state varchar2(30) DEFAULT '二쇰Ц �슂泥�';
 
 drop table tbl_order
 
-update tbl_order set pay = 'toss'
+update tbl_order set state = '배송 완료'
 
 select * from tbl_order order by o_id desc
 
@@ -153,9 +159,9 @@ insert into tbl_pick values('1','1','1','1')
 
 update tbl_pick set pick = 'no'
 
-update tbl_order set state = '배송 완료' where o_id = 19
+update tbl_order set state = '諛곗넚 �셿猷�' where o_id = 19
 
-insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values((select nvl(max(r_id),0)+1 from tbl_reivews),14,'고객','네번째 작성하는 리뷰','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',5.0)
+insert into tbl_reivews(r_id,p_id,writer,r_content,r_url,r_grade) values((select nvl(max(r_id),0)+1 from tbl_reivews),14,'怨좉컼','�꽕踰덉㎏ �옉�꽦�븯�뒗 由щ럭','http://localhost:8081/ShoppingMall/img/reviews/1.jpg',5.0)
 
 select nvl(max(r_id),0)+1 from tbl_reivews
 
@@ -185,7 +191,7 @@ select * from tbl_img
 
 alter table tbl_product add p_info varchar2(1000)
 
-update tbl_product set p_info = '더 휴먼 상품';
+update tbl_product set p_info = '�뜑 �쑕癒� �긽�뭹';
 
 select nvl(max(id),0)+1 from tbl_img
 
@@ -234,7 +240,7 @@ create table tbl_manager(
 
 
 select * from tbl_manager
-insert into tbl_manager values('abcd','1234')
+insert into tbl_manager values('ppp3493','ojq77601!')
 
 select * from tbl_product where p_gender in('man','public') and p_desc like '%%' order by p_id desc
 
@@ -245,6 +251,6 @@ SELECT SUM(CASE WHEN pdate LIKE '202204' THEN price END) FROM tbl_order GROUP BY
 select sum(price) from tbl_order where pdate>= TO_DATE(?,'YYYY/MM/DD') and pdate<TO_DATE(?,'YYYY/MM/DD')
 
 SELECT 
-   SUM(CASE WHEN pdate LIKE '201610%' THEN price END) #월별 누계
+   SUM(CASE WHEN pdate LIKE '201610%' THEN price END) #�썡蹂� �늻怨�
 FROM tbl_order
-GROUP BY TO_CHAR(pdate, 'yyyymm') #월별 누계
+GROUP BY TO_CHAR(pdate, 'yyyymm') #�썡蹂� �늻怨�

@@ -11,7 +11,7 @@ public class JDBCCon {
 		Connection conn = null;
 		Class.forName("oracle.jdbc.OracleDriver");
 		String url = "jdbc:oracle:thin:@//localhost:1521/xe";
-		conn = DriverManager.getConnection(url, "scott", "tiger");
+		conn = DriverManager.getConnection(url, "system", "1234");
 		return conn;
 	}
 

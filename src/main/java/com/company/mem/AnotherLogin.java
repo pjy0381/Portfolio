@@ -69,7 +69,7 @@ public class AnotherLogin extends HttpServlet {
 				PrintWriter out = response.getWriter(); 
 				   
 				String str="";
-				str = "ë¡œê·¸ì¸ ì„±ê³µ";  
+				str = "·Î±×ÀÎ ¼º°ø";  
 				out.print(str);
 			}
 			
